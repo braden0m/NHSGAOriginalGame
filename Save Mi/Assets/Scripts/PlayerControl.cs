@@ -59,7 +59,7 @@ public class PlayerControl: MonoBehaviour
         //midair detection
         RaycastHit midAirRay;
 
-        if (Physics.Raycast(transform.position - new Vector3(0, 1.7f, 0), -transform.up, out midAirRay, 1f))
+        if (Physics.Raycast(transform.position - new Vector3(0, 1.1f, 0), -transform.up, out midAirRay, 1f))
         {
             //print(midAirRay.collider.gameObject.name);
 
