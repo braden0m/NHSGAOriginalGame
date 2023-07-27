@@ -20,15 +20,19 @@ public class PlayerControl : MonoBehaviour
     float cloakAbility = 0;
     float lastSeenElapsedTime = 0;
     bool midair = true;
-    public GameObject enemy;
 
     Vector2 eyeStartingPosition;
     public GameObject openEye;
     public GameObject closedEye;
     public GameObject whiteBackground;
     public GameObject blackBackground;
-    public GameObject enemyIcon;
+    public Canvas canvas;
     public TextMeshProUGUI lastSeenCounter;
+
+    int heatVisionEnemyCount = 0;
+    List<GameObject> heatVisionEnemies = new List<GameObject>();
+    public GameObject enemyIcon;
+    List<GameObject> heatVisionEnemyIcons = new List<GameObject>();
 
     public float cameraSpeed;
     public float maxRotation = 75f;
@@ -85,52 +89,58 @@ public class PlayerControl : MonoBehaviour
 
         //Enemy Vision Ray
 
-        RaycastHit enemyRay;
-
-        if (Physics.Raycast(enemy.transform.position, (transform.position - enemy.transform.position), out enemyRay, 100f))
+        if (isDetectedByEnemy() != null)
         {
-            //print(midAirRay.collider.gameObject.name);
-
-            if (enemyRay.collider != null && enemyRay.collider.gameObject.CompareTag("Player"))
+            if (cloakAbility == 0f)
             {
                 lastSeenElapsedTime = 0f;
-                if (cloakAbility == 0f)
-                {
-                    lastSeenCounter.text = "Currently being seen by the enemy.";
-                }
-                else
-                {
-                    lastSeenCounter.text = "You would be currently visible to the enemy if you are not cloaking.";
-                }
+                lastSeenCounter.text = "Currently being seen by the enemy.";
             }
             else
             {
-                lastSeenCounter.text = "Last seen by enemy " + Mathf.Round(lastSeenElapsedTime * 100) / 100 + " seconds ago.";
+                lastSeenCounter.text = "You would be currently visible to the enemy if you are not cloaking.";
             }
+        }
+        else
+        {
+            lastSeenCounter.text = "Last seen by enemy " + Mathf.Round(lastSeenElapsedTime * 100) / 100 + " seconds ago.";
         }
 
         //Jumping
         if (!midair && isJumping == 1f)
         {
             midair = true;
-            rb.AddForce(new Vector3(0, 1, 0), ForceMode.Impulse);
+            rb.AddForce(new Vector3(0, 5, 0), ForceMode.Impulse);
         }
 
         if (heatVision == 1f)
         {
             Time.timeScale = 0.3f;
             cameraSpeed = 0.1f;
+
             openEye.transform.position = mouse.position.ReadValue();
             whiteBackground.gameObject.SetActive(true);
 
-            if (((Vector2) currentCamera.WorldToScreenPoint(enemy.transform.position) - (Vector2) mouse.position.ReadValue()).magnitude < 500)
+            heatVisionEnemies = allHeatVisionEnemiesInRange(75, 500);
+
+            if (heatVisionEnemies.Count != heatVisionEnemyCount)
             {
-                enemyIcon.transform.position = currentCamera.WorldToScreenPoint(enemy.transform.position);
-                enemyIcon.SetActive(true);
+                updateHeatVision();
             }
-            else
+
+            heatVisionEnemyCount = heatVisionEnemies.Count;
+
+            if (heatVisionEnemyIcons.Count > 0) //&& heatVisionEnemies.Count == heatVisionEnemyIcons.Count)
             {
-                enemyIcon.SetActive(false);
+                print(heatVisionEnemyIcons.Count);
+
+                for (int i = 0; i < heatVisionEnemyCount; i++)
+                {
+                    //print("Updating");
+                    heatVisionEnemyIcons[i].transform.position = currentCamera.WorldToScreenPoint(heatVisionEnemies[i].transform.position);
+                    //float scaleFactor = 1 / (heatVisionEnemies[i].transform.position - transform.position).magnitude;
+                    //heatVisionEnemyIcons[i].transform.localScale = new Vector3(scaleFactor, scaleFactor, 0);
+                }
             }
         }
         else
@@ -140,6 +150,14 @@ public class PlayerControl : MonoBehaviour
             enemyIcon.gameObject.SetActive(false);
             openEye.transform.position = eyeStartingPosition;
             whiteBackground.gameObject.SetActive(false);
+
+            if (heatVisionEnemyIcons.Count > 0)
+            {
+                foreach (GameObject val in heatVisionEnemyIcons)
+                {
+                    Destroy(val);
+                }
+            }
         }
 
         if (cloakAbility == 1f)
@@ -156,6 +174,70 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
+    List<GameObject> allHeatVisionEnemiesInRange(float dist3D, float dist2D)
+    {
+        List<GameObject> result = new List<GameObject>();
+
+        foreach (GameObject val in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            float distanceDifference = (val.transform.position - transform.position).magnitude;
+
+            if (distanceDifference <= dist3D)
+            {
+                if ((val.transform.position - (transform.position + currentCamera.transform.forward)).magnitude < distanceDifference)
+                {
+                    if (((Vector2)currentCamera.WorldToScreenPoint(val.transform.position) - (Vector2)mouse.position.ReadValue()).magnitude < dist2D)
+                    {
+                        result.Add(val);
+                    }
+
+                }
+            }
+        }
+
+        return result;
+    }
+    void updateHeatVision()
+    {
+        if (heatVisionEnemyIcons.Count > 0)
+        {
+            foreach (GameObject val in heatVisionEnemyIcons)
+            {
+                Destroy(val);
+            }
+            heatVisionEnemyIcons.Clear();
+        }
+
+
+        foreach (GameObject enemy in heatVisionEnemies)
+        {
+            GameObject marker = Instantiate(enemyIcon, currentCamera.WorldToScreenPoint(enemy.transform.position), Quaternion.identity, canvas.transform);
+            marker.gameObject.SetActive(true);
+            heatVisionEnemyIcons.Add(marker);
+        }
+    }
+    GameObject isDetectedByEnemy()
+    {
+        GameObject result = null;
+
+        foreach (GameObject val in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            RaycastHit enemyRay;
+
+            if (Physics.Raycast(val.transform.position, (transform.position - val.transform.position), out enemyRay, 75f))
+            {
+
+                if (enemyRay.collider != null && enemyRay.collider.gameObject.CompareTag("Player"))
+                {
+                    result = val;
+                    break;
+                }
+            }
+        }
+
+        return result;
+    }
+
     void OnMove(InputValue action)
     {
         moveDirection = action.Get<Vector2>();
@@ -170,9 +252,13 @@ public class PlayerControl : MonoBehaviour
         if (cloakAbility == 0f)
         {
             heatVision = action.Get<float>();
+
+            if (heatVision == 1)
+            {
+                updateHeatVision();
+            }
         }
     }
-
     void OnFire2(InputValue action)
     {
         if (heatVision == 0f)
