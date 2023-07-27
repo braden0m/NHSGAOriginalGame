@@ -26,6 +26,7 @@ public class PlayerControl : MonoBehaviour
     public GameObject closedEye;
     public GameObject whiteBackground;
     public GameObject blackBackground;
+    public TextMeshProUGUI proximityWarning;
     public Canvas canvas;
     public TextMeshProUGUI lastSeenCounter;
 
@@ -70,21 +71,27 @@ public class PlayerControl : MonoBehaviour
 
         currentCamera.transform.eulerAngles = new Vector3(lookDirectionX, lookDirectionY, 0);
 
-        //midair detection
-        RaycastHit midAirRay;
-
-        if (Physics.Raycast(transform.position - new Vector3(0, 1.1f, 0), -transform.up, out midAirRay, 1f))
+        if (cloakAbility == 1)
         {
-            //print(midAirRay.collider.gameObject.name);
+            //proximity detection
+            RaycastHit proximityRay;
+            Physics.Raycast(transform.position, rb.velocity, out proximityRay, rb.velocity.magnitude * 1.5f);
 
-            if (midAirRay.collider != null)
+            if (proximityRay.collider != null)
             {
-                midair = false;
+                proximityWarning.gameObject.SetActive(true);
+                proximityWarning.transform.position = currentCamera.WorldToScreenPoint(proximityRay.point);
+                proximityWarning.text = "Proximity Warning: " + (proximityRay.point - transform.position).magnitude + " units away.";
+
             }
             else
             {
-                midair = true;
+                proximityWarning.gameObject.SetActive(false);
             }
+        }
+        else
+        {
+            proximityWarning.gameObject.SetActive(false);
         }
 
         //Enemy Vision Ray
