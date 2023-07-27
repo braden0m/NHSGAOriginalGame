@@ -16,17 +16,15 @@ public class PlayerControl: MonoBehaviour
     Vector3 moveDirection;
     float speedMultiplier = 1f;
     float isJumping = 0;
-    float heatVision = 0;
-    float cloakAbility = 0;
-    float lastSeenElapsedTime = 0;
     bool midair = true;
-
     public float cameraSpeed;
     public float maxRotation = 75f;
     public Camera currentCamera;
     Vector2 deltaLookDirection;
 
     Mouse mouse;
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +36,6 @@ public class PlayerControl: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        lastSeenElapsedTime += Time.deltaTime;
 
         //Movement
         rb.AddForce((currentCamera.transform.forward * moveDirection.y + currentCamera.transform.right * moveDirection.x) * speedMultiplier * moveSpeed * Time.deltaTime, ForceMode.Force);
@@ -59,7 +56,8 @@ public class PlayerControl: MonoBehaviour
         //midair detection
         RaycastHit midAirRay;
 
-        if (Physics.Raycast(transform.position - new Vector3(0, 1.1f, 0), -transform.up, out midAirRay, 1f))
+
+        if (Physics.Raycast(transform.position - new Vector3(0, 0.8f, 0), -transform.up, out midAirRay, 1f))
         {
             //print(midAirRay.collider.gameObject.name);
 
@@ -78,8 +76,11 @@ public class PlayerControl: MonoBehaviour
         if (!midair && isJumping == 1f)
         {
             midair = true;
-            rb.AddForce(new Vector3(0, 1, 0), ForceMode.Impulse);
+            rb.AddForce(new Vector3(0, 20f, 0), ForceMode.Impulse);
+            isJumping = 0;
         }
+
+        
 
     }
 
@@ -94,7 +95,9 @@ public class PlayerControl: MonoBehaviour
 
     void OnJump(InputValue action)
     {
-        isJumping = action.Get<float>();
-        Debug.Log(isJumping);
+        isJumping = 1;
     }
+
+   
+    
 }
