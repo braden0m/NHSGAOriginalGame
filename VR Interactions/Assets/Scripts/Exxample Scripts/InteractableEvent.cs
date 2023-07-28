@@ -29,7 +29,7 @@ public class InteractableEvent : MonoBehaviour
 
     public void InteractableDeactivate(DeactivateEventArgs args)
     {
-        cubeRenderer.material.color = originalColor;
+        cubeRenderer.material.color = newColor;
     }
 
     public void InteractableChangeColor(SelectEnterEventArgs args)
