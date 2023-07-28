@@ -10,6 +10,7 @@ public class InteractableEvent : MonoBehaviour
     private Renderer cubeRenderer;
     private Color originalColor;
     [SerializeField] private Color newColor;
+    [SerializeField] private Color activeColor;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +19,7 @@ public class InteractableEvent : MonoBehaviour
         originalColor = cubeRenderer.material.color;
     }
     private void OnEnable() {
-        
+        cubeRenderer.material.color = activeColor;
     }
 
     public void InteractableChangeColor(SelectEnterEventArgs args)
@@ -31,6 +32,6 @@ public class InteractableEvent : MonoBehaviour
     }
     public void InteractorVibrate(SelectEnterEventArgs arg)
     {
-        arg.interactorObject.transform.GetComponent<ActionBasedController>().SendHapticImpulse(0.5f, 0.2f);
+        arg.interactorObject.transform.GetComponent<ActionBasedController>().SendHapticImpulse(2f, 1f);
     }
 }
