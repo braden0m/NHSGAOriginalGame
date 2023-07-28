@@ -19,7 +19,17 @@ public class InteractableEvent : MonoBehaviour
         originalColor = cubeRenderer.material.color;
     }
     private void OnEnable() {
+
+    }
+
+    public void InteractableActivate(ActivateEventArgs args)
+    {
         cubeRenderer.material.color = activeColor;
+    }
+
+    public void InteractableDeactivate(DeactivateEventArgs args)
+    {
+        cubeRenderer.material.color = originalColor;
     }
 
     public void InteractableChangeColor(SelectEnterEventArgs args)
