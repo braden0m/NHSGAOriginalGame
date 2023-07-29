@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Rag
   - Exit
+  - Fire
+  - Burnable
   layers:
   - Default
   - TransparentFX
