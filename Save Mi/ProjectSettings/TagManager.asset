@@ -8,6 +8,7 @@ TagManager:
   - Exit
   - Fire
   - Burnable
+  - Breakable
   layers:
   - Default
   - TransparentFX

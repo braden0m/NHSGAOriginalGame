@@ -65,8 +65,7 @@ public class FireSpread : MonoBehaviour
     }
     void SpreadFire()
     {
-        int resolution = Mathf.RoundToInt(Random.Range(4, 8));
-
+        int resolution = 8;
         for (int i = 0; i < resolution; i++)
         {
             RaycastHit nextFireRay;
@@ -116,7 +115,6 @@ public class FireSpread : MonoBehaviour
 
             while (timeScale < randomSpreadSpeed)
             {
-                print(timeScale);
 
                 timeScale += Time.deltaTime;
                 transform.position = Vector3.Lerp(initialPosition, finalPosition, timeScale / randomSpreadSpeed);
