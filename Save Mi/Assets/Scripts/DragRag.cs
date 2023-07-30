@@ -19,7 +19,7 @@ public class DragRag : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(curRag);
+        //Debug.Log(curRag);
         //Debug.Log(isDrag);
         if (isDrag && curRag != null)
         {

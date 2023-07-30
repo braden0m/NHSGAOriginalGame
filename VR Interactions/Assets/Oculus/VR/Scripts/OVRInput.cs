@@ -1867,7 +1867,12 @@ public static class OVRInput
 		return isValid;
 	}
 
-	private abstract class OVRControllerBase
+    public static object Get(Vector2 vector2)
+    {
+        throw new NotImplementedException();
+    }
+
+    private abstract class OVRControllerBase
 	{
 		public class VirtualButtonMap
 		{
