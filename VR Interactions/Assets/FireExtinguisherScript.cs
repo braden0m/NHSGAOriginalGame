@@ -23,6 +23,8 @@ public class FireExtinguisherScript : MonoBehaviour
     }
     private void Update()
     {
+        spray.gameObject.SetActive(spraying);
+
         if (spraying)
         {
             print("SPRAY");
