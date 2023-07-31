@@ -25,13 +25,32 @@ public class BreakableObject : MonoBehaviour
     {
         experiencedForce = Mathf.Abs(rb.velocity.magnitude * 2 + rb.angularVelocity.magnitude);
 
-        print(experiencedForce);
+        //print(experiencedForce);
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (experiencedForce > materialStrength)
+        float createdForce = collision.gameObject.GetComponent<AxeScript>().createdForce;
+        if (createdForce != null)
         {
-            //StartCoroutine(Explode());
+            if (collision.gameObject.CompareTag("BreakTool"))
+            {
+                print(experiencedForce + createdForce);
+
+                if (experiencedForce + createdForce > materialStrength)
+                {
+                    print("Break");
+                    StartCoroutine(Explode());
+                }
+            }
+        }
+        else
+        {
+
+            if (experiencedForce > materialStrength)
+            {
+                print("Break");
+                StartCoroutine(Explode());
+            }
         }
     }
     IEnumerator Explode()

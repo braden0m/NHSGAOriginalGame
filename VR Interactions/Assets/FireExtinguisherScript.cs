@@ -23,8 +23,11 @@ public class FireExtinguisherScript : MonoBehaviour
     }
     private void Update()
     {
-        if (spraying && held)
+        spray.gameObject.SetActive(spraying);
+
+        if (spraying)
         {
+            print("SPRAY");
             spray.Play();
         }
         else
