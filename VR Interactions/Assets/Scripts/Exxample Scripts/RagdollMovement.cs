@@ -13,16 +13,20 @@ public class RagdollMovement : MonoBehaviour
     [SerializeField] private Rigidbody ragdoll;
     private Vector3[] masterBedLerpPos;
     private float lerpDuration;
+    private int count;
+
+    private Coroutine currentCoroutine;
     void Start()
     {
         isInitialMove = true;
+        lerpDuration = 3f;
         float x1 = 5f;
         float x2 = 20f;
         float z1 = -20f;
         float z2 = -35f;
         float y = 6f;
         masterBedLerpPos = new Vector3[] { new Vector3(x1, y, z1), new Vector3(x2, y, z1), new Vector3(x2, y, z2), new Vector3(x1, y, z2) };
-
+        count = 0;
     }
 
     // Update is called once per frame
@@ -32,11 +36,19 @@ public class RagdollMovement : MonoBehaviour
         {
             // lerp between points
             // master bedroom X[5,20] Y[-20,-35]
-            for (int i = 0; i < 3; i++)
+     
+            if (currentCoroutine == null)
             {
-                Debug.Log(i);
-                StartCoroutine(StartLerp(masterBedLerpPos[i], masterBedLerpPos[i + 1]));
+                currentCoroutine = StartCoroutine(StartLerp(masterBedLerpPos[count], masterBedLerpPos[count + 1]));
+
+                if (count == 3)
+                {
+                    count = 0;
+                }
+
             }
+            //isInitialMove = false;
+            print(isInitialMove);
         }
         else if (isDragged)
         {
@@ -55,13 +67,17 @@ public class RagdollMovement : MonoBehaviour
         while (timeElapsed < lerpDuration)
         {
             float t = timeElapsed / lerpDuration;
-            ragdoll.transform.position = Vector2.Lerp(start, end, t);
+            ragdoll.transform.position = Vector3.Lerp(start, end, t);
             timeElapsed += Time.deltaTime;
 
-            yield return null;
+            yield return new WaitForSeconds(Time.deltaTime);
+
+            print(timeElapsed);
         }
         ragdoll.transform.position = end;
+        count++;
 
+        currentCoroutine = null;
     }
 }
 
