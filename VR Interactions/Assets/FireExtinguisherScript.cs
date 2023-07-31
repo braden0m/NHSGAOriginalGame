@@ -23,8 +23,9 @@ public class FireExtinguisherScript : MonoBehaviour
     }
     private void Update()
     {
-        if (spraying && held)
+        if (spraying)
         {
+            print("SPRAY");
             spray.Play();
         }
         else
