@@ -39,6 +39,11 @@ public class FireExtinguisherScript : MonoBehaviour
     {
         spraying = true;
     }
+
+    public void InteractableDeactivate(DeactivateEventArgs args)
+    {
+        spraying = false;
+    }
     public void InteractableHeld(SelectEnterEventArgs args)
     {
         held = true;
@@ -49,11 +54,6 @@ public class FireExtinguisherScript : MonoBehaviour
     {
         held = false;
         cubeRenderer.material.color = originalColor;
-    }
-    public void InteractableDeactivate(DeactivateEventArgs args)
-    {
-        spraying = false;
-        spray.Stop();
     }
     public void InteractableHover(HoverEnterEventArgs args)
     {
