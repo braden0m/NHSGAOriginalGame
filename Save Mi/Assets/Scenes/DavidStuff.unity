@@ -882,6 +882,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e62ff6c82d97be42a3746d1b53a816c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firePrefab: {fileID: 6158535509074247291, guid: a145c2cd67fc88246bbd947ee1a4f00a,
+    type: 3}
+  allFire: []
+  activeFire: []
+  fireDirectionResolution: 8
+  maxSurroundingFire: 5
+  spreadDistance: 2
+  spreadTime: 0.25
 --- !u!4 &653339036
 Transform:
   m_ObjectHideFlags: 0
@@ -974,14 +982,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 729781000}
-  m_LocalRotation: {x: 0.18096024, y: -0.6835594, z: 0.13030154, w: 0.69499743}
-  m_LocalPosition: {x: 8.96, y: 16.93, z: 1.91}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -6.5, y: 39.1, z: -14.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 25.447, y: -90, z: -4.209}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &729781004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2008,7 +2016,7 @@ PrefabInstance:
     - target: {fileID: 6158535509074246022, guid: a145c2cd67fc88246bbd947ee1a4f00a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.85
+      value: 3.86
       objectReference: {fileID: 0}
     - target: {fileID: 6158535509074246022, guid: a145c2cd67fc88246bbd947ee1a4f00a,
         type: 3}
@@ -2018,7 +2026,7 @@ PrefabInstance:
     - target: {fileID: 6158535509074246022, guid: a145c2cd67fc88246bbd947ee1a4f00a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -23.16
+      value: -4.49
       objectReference: {fileID: 0}
     - target: {fileID: 6158535509074246022, guid: a145c2cd67fc88246bbd947ee1a4f00a,
         type: 3}
