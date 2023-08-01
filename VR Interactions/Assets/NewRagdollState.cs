@@ -31,20 +31,25 @@ public class NewRagdollState : MonoBehaviour
 
         ragdollColliders = GetComponentsInChildren<Collider>().ToList<Collider>();
         ragdollParts = GetComponentsInChildren<Rigidbody>().ToList<Rigidbody>();
+
+        RagdollModeOff();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 targetDifference = waypoints[currentWaypointIndex].transform.position - transform.position;
-
-        mainRigidbody.velocity = targetDifference.normalized * 5;
-
         if (!isGrabbed)
         {
-            transform.rotation = Quaternion.Euler(0, Mathf.Atan2(targetDifference.x, targetDifference.z) * Mathf.Rad2Deg, 0);
+            //transform.rotation = Quaternion.Euler(0, Mathf.Atan2(targetDifference.x, targetDifference.z) * Mathf.Rad2Deg, 0);
+            Vector3 targetDifference = waypoints[currentWaypointIndex].transform.position - transform.position;
 
+            print(targetDifference);
 
+            transform.position += targetDifference.normalized * 5 * Time.deltaTime;
+
+            //mainRigidbody.velocity = targetDifference.normalized * 5;
+
+            transform.LookAt(waypoints[currentWaypointIndex].transform);
         }
 
         if (((Vector3)transform.position - (Vector3)waypoints[currentWaypointIndex].transform.position).magnitude < 1)
@@ -92,10 +97,14 @@ public class NewRagdollState : MonoBehaviour
     public void InteractableHeld(SelectEnterEventArgs args)
     {
         isGrabbed = true;
+
+        RagdollModeOn();
     }
 
     public void InteractableUnheld(SelectExitEventArgs args)
     {
         isGrabbed = false;
+
+        RagdollModeOff();
     }
 }

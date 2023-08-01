@@ -18,7 +18,6 @@ public class InteractableEvent : MonoBehaviour
         cubeRenderer = GetComponent<Renderer>();
         originalColor = cubeRenderer.material.color;
     }
-
     public void InteractableActivate(ActivateEventArgs args)
     {
         cubeRenderer.material.color = activeColor;
