@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.Events;
 using UnityEditor;
+using System.Linq;
 
 public class RagdollMovement : MonoBehaviour
 {
@@ -17,8 +18,10 @@ public class RagdollMovement : MonoBehaviour
     [SerializeField] private GameObject thisRagdoll;
     [SerializeField] private Animator thisAnim;
     [SerializeField] private Collider mainCollider;
-    [SerializeField] private Rigidbody[] ragdollParts;
-    [SerializeField] private Collider[] ragdollColliders;
+    [SerializeField] private List<Rigidbody> ragdollParts;
+    [SerializeField] private List<Collider> ragdollColliders;
+
+    public Collider spineCollider;
 
     public List<Transform> lerpLocations;
     private float lerpDuration, ragAge;
@@ -34,16 +37,19 @@ public class RagdollMovement : MonoBehaviour
         isInitialMove = true;
         GetRagdollComponents();
         RagdollModeOff();
-        lerpDuration = 1f;
+        lerpDuration = 10f;
         // store the time it can stay in the fire 
         ragAge = 0f;
         count = 0;
         countLerps = lerpLocations.Count;
+
+        canInteract = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if (isInitialMove)
         {
             thisAnim.SetBool("isRun", true);
@@ -59,8 +65,10 @@ public class RagdollMovement : MonoBehaviour
 
     private void GetRagdollComponents()
     {
-        ragdollColliders = GetComponentsInChildren<Collider>();
-        ragdollParts = GetComponentsInChildren<Rigidbody>();
+        ragdollColliders = GetComponentsInChildren<Collider>().ToList<Collider>();
+        ragdollParts = GetComponentsInChildren<Rigidbody>().ToList<Rigidbody>();
+
+        ragdollColliders.Remove(spineCollider);
     }
 
     private void RagdollModeOff()
@@ -75,7 +83,7 @@ public class RagdollMovement : MonoBehaviour
             rb.isKinematic = true;
         }
         mainCollider.enabled = true;
-        mainRb.isKinematic = false;
+        //mainRb.isKinematic = false;
     }
 
     private void RagdollModeOn()
