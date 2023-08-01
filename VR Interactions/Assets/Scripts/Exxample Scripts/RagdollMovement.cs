@@ -13,7 +13,7 @@ public class RagdollMovement : MonoBehaviour
     /// if its dragged, it becomes ragdoll
     /// if not dragged, using animation - may add pointing and move feature 
     /// </summary>
-    private bool isInitialMove, canInteract, isGrabbed;
+    private bool isInitialMove, canInteract;
     [SerializeField] private Rigidbody mainRb;
     [SerializeField] private GameObject thisRagdoll;
     [SerializeField] private Animator thisAnim;
@@ -28,8 +28,6 @@ public class RagdollMovement : MonoBehaviour
     private int count, countLerps;
     private Coroutine currentCoroutine;
 
-    public GameObject armature;
-
 
     // ragdoll movement
     private XRBaseInteractable interactable;
@@ -39,7 +37,7 @@ public class RagdollMovement : MonoBehaviour
         isInitialMove = true;
         GetRagdollComponents();
         RagdollModeOff();
-        lerpDuration = 3f;
+        lerpDuration = 10f;
         // store the time it can stay in the fire 
         ragAge = 0f;
         count = 0;
@@ -52,20 +50,13 @@ public class RagdollMovement : MonoBehaviour
     void Update()
     {
 
-        if (isGrabbed)
-        {
-            armature.transform.position = spineCollider.transform.position;
-        }
-
-        if (isInitialMove && !isGrabbed)
+        if (isInitialMove)
         {
             thisAnim.SetBool("isRun", true);
             // lerp between points
             if (currentCoroutine == null)
             {
-                //Continue from current position instead of last waypoint, to remove teleporting
-                //currentCoroutine = StartCoroutine(StartLerp(lerpLocations[count% countLerps].position, lerpLocations[(count+1)% countLerps].position));
-                currentCoroutine = StartCoroutine(StartLerp(mainRb.transform.position, lerpLocations[(count + 1) % countLerps].position));
+                currentCoroutine = StartCoroutine(StartLerp(lerpLocations[count% countLerps].position, lerpLocations[(count+1)% countLerps].position));
             }
             //isInitialMove = false;
             //print(isInitialMove);
@@ -83,7 +74,6 @@ public class RagdollMovement : MonoBehaviour
     private void RagdollModeOff()
     {
         thisAnim.enabled = true;
-        thisAnim.SetBool("isRun", false);
         foreach (Collider ragCol in ragdollColliders)
         {
             ragCol.enabled = false;
@@ -116,15 +106,6 @@ public class RagdollMovement : MonoBehaviour
     {
         if (canInteract)
         {
-            isGrabbed = true;
-
-            //Stop lerp
-            if (currentCoroutine != null)
-            {
-                StopCoroutine(currentCoroutine);
-                currentCoroutine = null;
-            }
-
             isInitialMove = false;
             RagdollModeOn();
         }
@@ -134,10 +115,8 @@ public class RagdollMovement : MonoBehaviour
     {
         if (canInteract)
         {
-            isGrabbed = false;
             isInitialMove = false;
             RagdollModeOff();
-
         }
     }
 
@@ -185,10 +164,7 @@ public class RagdollMovement : MonoBehaviour
         thisRagdoll.transform.Rotate(0.0f, 90.0f, 0.0f);
         count++;
 
-        Debug.Log("coroutine");
         currentCoroutine = null;
-
-
     }
 }
 
