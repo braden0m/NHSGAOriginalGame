@@ -23,7 +23,6 @@ public class BreakableObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         experiencedForce = Mathf.Abs(rb.velocity.magnitude * 2 + rb.angularVelocity.magnitude);
 
         //print(experiencedForce);
