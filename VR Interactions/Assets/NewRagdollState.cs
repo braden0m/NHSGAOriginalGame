@@ -20,7 +20,7 @@ public class NewRagdollState : MonoBehaviour
     public List<Transform> waypoints;
     private int currentWaypointIndex;
 
-    private bool isGrabbed = true;
+    private bool isGrabbed = false;
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +42,7 @@ public class NewRagdollState : MonoBehaviour
 
         if (!isGrabbed)
         {
-            transform.rotation = Quaternion.Euler(0, Mathf.Atan2(targetDifference.x, targetDifference.z), 0);
+            transform.rotation = Quaternion.Euler(0, Mathf.Atan2(targetDifference.x, targetDifference.z) * Mathf.Rad2Deg, 0);
 
             
         }
