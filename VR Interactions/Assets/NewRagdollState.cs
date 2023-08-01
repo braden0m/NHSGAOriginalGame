@@ -8,6 +8,8 @@ using System.Linq;
 
 public class NewRagdollState : MonoBehaviour
 {
+    [SerializeField] private float moveSpeed;
+
     [SerializeField] private GameObject pelvis;
     [SerializeField] private GameObject armature;
 
@@ -20,7 +22,10 @@ public class NewRagdollState : MonoBehaviour
     public List<Transform> waypoints;
     private int currentWaypointIndex;
 
+    private Vector3 currentVelocity;
+
     private bool isGrabbed = false;
+    [SerializeField] private bool isMoving = true;
 
     // Start is called before the first frame update
     void Start()
@@ -38,16 +43,19 @@ public class NewRagdollState : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        animator.SetBool("Running", isMoving);
+
         if (!isGrabbed)
         {
             //transform.rotation = Quaternion.Euler(0, Mathf.Atan2(targetDifference.x, targetDifference.z) * Mathf.Rad2Deg, 0);
-            Vector3 targetDifference = waypoints[currentWaypointIndex].transform.position - transform.position;
+            Vector3 targetPositionalDifference = waypoints[currentWaypointIndex].transform.position - transform.position;
+            //transform.position += targetPositionalDifference.normalized * 3 * Time.deltaTime;
 
-            print(targetDifference);
+            transform.position = Vector3.SmoothDamp(transform.position, waypoints[currentWaypointIndex].transform.position, ref currentVelocity, targetPositionalDifference.magnitude / moveSpeed);
 
-            transform.position += targetDifference.normalized * 5 * Time.deltaTime;
+            //mainRigidbody.velocity = targetPositionalDifference.normalized * 5;
 
-            //mainRigidbody.velocity = targetDifference.normalized * 5;
+            //Vector3 targetRotation = Quaternion.LookRotation(targetPositionalDifference, Vector3.up).eulerAngles;
 
             transform.LookAt(waypoints[currentWaypointIndex].transform);
         }

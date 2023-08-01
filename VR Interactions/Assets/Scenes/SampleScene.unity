@@ -4168,6 +4168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 958d552cb91110e4cbe01a0cc080973a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 3
   pelvis: {fileID: 243761215}
   armature: {fileID: 698345237}
   ragdollParts: []
@@ -4177,6 +4178,7 @@ MonoBehaviour:
   - {fileID: 1285925862}
   - {fileID: 1080729760}
   - {fileID: 2122067799}
+  isMoving: 1
 --- !u!1 &1285925861
 GameObject:
   m_ObjectHideFlags: 0
