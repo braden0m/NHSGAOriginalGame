@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6158535509074246023}
   - component: {fileID: 6158535509074247288}
   - component: {fileID: 6158535509074247289}
-  - component: {fileID: 6158535509074247290}
   m_Layer: 0
   m_Name: FireUnit
   m_TagString: Fire
@@ -4845,21 +4844,3 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.3270956
   m_Center: {x: 0, y: 1.7178315e-15, z: 0.3708816}
---- !u!114 &6158535509074247290
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6158535509074247291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25d596018d0edf8489a41a891e1da350, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fire: {fileID: 6158535509074247291}
-  canSpread: 0
-  isSeed: 0
-  burntMaterial: {fileID: 2100000, guid: 92ace4c63b9e4774e84dc8a5e6ffb09c, type: 2}
-  initialPosition: {x: 0, y: 0, z: 0}
-  finalPosition: {x: 0, y: 0, z: 0}
