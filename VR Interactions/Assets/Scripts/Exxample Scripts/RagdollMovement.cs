@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.Events;
+using UnityEditor;
 
 public class RagdollMovement : MonoBehaviour
 {
@@ -9,24 +12,32 @@ public class RagdollMovement : MonoBehaviour
     /// if its dragged, it becomes ragdoll
     /// if not dragged, using animation - may add pointing and move feature 
     /// </summary>
-    private bool isInitialMove, isDragged;
-    [SerializeField] private Rigidbody ragdoll;
-    private Vector3[] masterBedLerpPos;
-    private float lerpDuration;
-    private int count;
+    private bool isInitialMove, canInteract;
+    [SerializeField] private Rigidbody mainRb;
+    [SerializeField] private GameObject thisRagdoll;
+    [SerializeField] private Animator thisAnim;
+    [SerializeField] private Collider mainCollider;
+    [SerializeField] private Rigidbody[] ragdollParts;
+    [SerializeField] private Collider[] ragdollColliders;
 
+    public List<Transform> lerpLocations;
+    private float lerpDuration, ragAge;
+    private int count, countLerps;
     private Coroutine currentCoroutine;
+
+    // ragdoll movement
+    private XRBaseInteractable interactable;
+    
     void Start()
     {
         isInitialMove = true;
-        lerpDuration = 3f;
-        float x1 = 5f;
-        float x2 = 20f;
-        float z1 = -20f;
-        float z2 = -35f;
-        float y = 6f;
-        masterBedLerpPos = new Vector3[] { new Vector3(x1, y, z1), new Vector3(x2, y, z1), new Vector3(x2, y, z2), new Vector3(x1, y, z2) };
+        RagdollModeOff();
+        GetRagdollComponents();
+        lerpDuration = 1f;
+        // store the time it can stay in the fire 
+        ragAge = 0f;
         count = 0;
+        countLerps = lerpLocations.Count;
     }
 
     // Update is called once per frame
@@ -35,29 +46,94 @@ public class RagdollMovement : MonoBehaviour
         if (isInitialMove)
         {
             // lerp between points
-            // master bedroom X[5,20] Y[-20,-35]
-     
             if (currentCoroutine == null)
             {
-                currentCoroutine = StartCoroutine(StartLerp(masterBedLerpPos[count], masterBedLerpPos[count + 1]));
-
-                if (count == 3)
-                {
-                    count = 0;
-                }
-
+                currentCoroutine = StartCoroutine(StartLerp(lerpLocations[count% countLerps].position, lerpLocations[(count+1)% countLerps].position));
             }
             //isInitialMove = false;
-            print(isInitialMove);
+            //print(isInitialMove);
         }
-        else if (isDragged)
+    }
+
+    private void GetRagdollComponents()
+    {
+        ragdollColliders = GetComponentsInChildren<Collider>();
+        ragdollParts = GetComponentsInChildren<Rigidbody>();
+    }
+
+    private void RagdollModeOff()
+    {
+        thisAnim.enabled = false;
+        foreach (Collider ragCol in ragdollColliders)
         {
-            // become ragdoll, animation ends/disabled
+            ragCol.enabled = false;
         }
-        else if (!isDragged)
+        foreach (Rigidbody rb in ragdollParts)
         {
-            // disable ragdoll, animation abled
+            rb.isKinematic = true;
         }
+        mainCollider.enabled = true;
+        mainRb.isKinematic = false;
+    }
+
+    private void RagdollModeOn()
+    {
+        thisAnim.enabled = true;
+        foreach (Collider ragCol in ragdollColliders)
+        {
+            ragCol.enabled = true;
+        }
+        foreach (Rigidbody rb in ragdollParts)
+        {
+            rb.isKinematic = false;
+        }
+        mainCollider.enabled = false;
+        mainRb.isKinematic = true;
+    }
+
+    // vr actions
+    public void InteractableHeld(SelectEnterEventArgs args)
+    {
+        if (canInteract)
+        {
+            isInitialMove = false;
+            RagdollModeOn();
+        }
+    }
+
+    public void InteractableUnheld(SelectExitEventArgs args)
+    {
+        if (canInteract)
+        {
+            isInitialMove = false;
+            RagdollModeOff();
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        // ! add tag
+        if (other.gameObject.tag == "Fire")
+        {
+            RagdollModeOn();
+            ragAge += Time.deltaTime;
+            // fade out by falling into the ground
+            if (ragAge > 2f)
+            {
+                StartCoroutine(Die());
+            }
+        }
+    }
+
+    IEnumerator Die()
+    {
+        //// play dying anim/particle system, tell the game manager
+        //die.Play();
+        // ! game manager
+        // can no longer do actions on them, ! maybe can put flowers lol
+        canInteract = false;
+        yield return new WaitForSeconds(10f);
+        Destroy(thisRagdoll);
     }
 
     IEnumerator StartLerp(Vector3 start, Vector3 end)
@@ -67,14 +143,14 @@ public class RagdollMovement : MonoBehaviour
         while (timeElapsed < lerpDuration)
         {
             float t = timeElapsed / lerpDuration;
-            ragdoll.transform.position = Vector3.Lerp(start, end, t);
+            mainRb.transform.position = Vector3.Lerp(start, end, t);
             timeElapsed += Time.deltaTime;
 
             yield return new WaitForSeconds(Time.deltaTime);
 
-            print(timeElapsed);
+            //print(timeElapsed);
         }
-        ragdoll.transform.position = end;
+        mainRb.transform.position = end;
         count++;
 
         currentCoroutine = null;
