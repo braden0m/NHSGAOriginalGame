@@ -25,14 +25,15 @@ public class RagdollMovement : MonoBehaviour
     private int count, countLerps;
     private Coroutine currentCoroutine;
 
+
     // ragdoll movement
     private XRBaseInteractable interactable;
     
     void Start()
     {
         isInitialMove = true;
-        RagdollModeOff();
         GetRagdollComponents();
+        RagdollModeOff();
         lerpDuration = 1f;
         // store the time it can stay in the fire 
         ragAge = 0f;
@@ -45,6 +46,7 @@ public class RagdollMovement : MonoBehaviour
     {
         if (isInitialMove)
         {
+            thisAnim.SetBool("isRun", true);
             // lerp between points
             if (currentCoroutine == null)
             {
@@ -63,7 +65,7 @@ public class RagdollMovement : MonoBehaviour
 
     private void RagdollModeOff()
     {
-        thisAnim.enabled = false;
+        thisAnim.enabled = true;
         foreach (Collider ragCol in ragdollColliders)
         {
             ragCol.enabled = false;
@@ -78,7 +80,7 @@ public class RagdollMovement : MonoBehaviour
 
     private void RagdollModeOn()
     {
-        thisAnim.enabled = true;
+        thisAnim.enabled = false;
         foreach (Collider ragCol in ragdollColliders)
         {
             ragCol.enabled = true;
@@ -151,6 +153,7 @@ public class RagdollMovement : MonoBehaviour
             //print(timeElapsed);
         }
         mainRb.transform.position = end;
+        thisRagdoll.transform.Rotate(0.0f, 90.0f, 0.0f);
         count++;
 
         currentCoroutine = null;
