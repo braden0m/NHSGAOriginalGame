@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.Events;
-
+using UnityEngine.SceneManagement;
 public class InteractableEvent : MonoBehaviour
 {
     private XRBaseInteractable interactable;
@@ -22,6 +22,7 @@ public class InteractableEvent : MonoBehaviour
     public void InteractableActivate(ActivateEventArgs args)
     {
         cubeRenderer.material.color = activeColor;
+        StartGame();
     }
 
     public void InteractableDeactivate(DeactivateEventArgs args)
@@ -40,5 +41,18 @@ public class InteractableEvent : MonoBehaviour
     public void InteractorVibrate(SelectEnterEventArgs arg)
     {
         arg.interactorObject.transform.GetComponent<ActionBasedController>().SendHapticImpulse(2f, 1f);
+    }
+
+    public void InteractableHover(HoverEnterEventArgs args)
+    {
+        cubeRenderer.material.color = newColor;
+        StartGame();
+    }
+    public void StartGame()
+    {
+        Debug.Log("START GAME");
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
     }
 }

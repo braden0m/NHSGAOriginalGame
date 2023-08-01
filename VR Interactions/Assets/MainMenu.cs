@@ -18,6 +18,8 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
+        Debug.Log("START GAME");
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
 
     }
