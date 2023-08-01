@@ -36,7 +36,6 @@ public class AxeScript : MonoBehaviour
         customAngularVelocity = currentRotation - lastRotation;
 
         createdForce = Mathf.Abs(customVelocity.magnitude * 2 + customAngularVelocity.magnitude);
-        print(rb.velocity);
 
         lastPosition = currentPosition;
         lastRotation = transform.rotation.eulerAngles;
