@@ -57,18 +57,20 @@ public class NewRagdollState : MonoBehaviour
         //if (true)
         {
             //transform.rotation = Quaternion.Euler(0, Mathf.Atan2(targetDifference.x, targetDifference.z) * Mathf.Rad2Deg, 0);
-            Vector3 targetPositionalDifference = waypoints[currentWaypointIndex].transform.position - mainRigidbody.transform.position;
+            Vector3 targetPositionalDifference = waypoints[currentWaypointIndex].transform.position - armature.transform.position;
             //transform.position += targetPositionalDifference.normalized * 3 * Time.deltaTime;
-            //transform.position = Vector3.SmoothDamp(transform.position, waypoints[currentWaypointIndex].transform.position, ref currentVelocity, targetPositionalDifference.magnitude / moveSpeed);
+            //transform.position = Vector3.SmoothDamp(armature.transform.position, waypoints[currentWaypointIndex].transform.position, ref currentVelocity, targetPositionalDifference.magnitude / moveSpeed);
             mainRigidbody.velocity = targetPositionalDifference.normalized * 5 * Time.deltaTime;
 
             Debug.Log(targetPositionalDifference.normalized * 5);
 
             //Vector3 targetRotation = Quaternion.LookRotation(targetPositionalDifference, Vector3.up).eulerAngles;
 
-            Quaternion lookDirection = Quaternion.LookRotation(targetPositionalDifference, Vector3.up);
+            //Quaternion lookDirection = Quaternion.LookRotation(targetPositionalDifference, Vector3.up);
 
-            //mainRigidbody.rotation = Quaternion.Euler(lookDirection.x, 0, lookDirection.z);
+            //armature.transform.rotation = Quaternion.Euler(lookDirection.x, 0, lookDirection.z);
+
+            //armature.transform.LookAt(waypoints[currentWaypointIndex].transform.position);
         }
 
         if (((Vector3)mainRigidbody.transform.position - (Vector3)waypoints[currentWaypointIndex].transform.position).magnitude < 1)
