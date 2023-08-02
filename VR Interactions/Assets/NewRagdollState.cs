@@ -45,7 +45,7 @@ public class NewRagdollState : MonoBehaviour
     {
         animator.SetBool("Running", isMoving);
 
-        if (!isGrabbed)
+        if (!isGrabbed && isMoving)
         {
             //transform.rotation = Quaternion.Euler(0, Mathf.Atan2(targetDifference.x, targetDifference.z) * Mathf.Rad2Deg, 0);
             Vector3 targetPositionalDifference = waypoints[currentWaypointIndex].transform.position - transform.position;
