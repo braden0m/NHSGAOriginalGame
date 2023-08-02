@@ -60,15 +60,16 @@ public class NewRagdollState : MonoBehaviour
             Vector3 targetPositionalDifference = waypoints[currentWaypointIndex].transform.position - armature.transform.position;
             //transform.position += targetPositionalDifference.normalized * 3 * Time.deltaTime;
             //transform.position = Vector3.SmoothDamp(armature.transform.position, waypoints[currentWaypointIndex].transform.position, ref currentVelocity, targetPositionalDifference.magnitude / moveSpeed);
-            mainRigidbody.velocity = targetPositionalDifference.normalized * 5 * Time.deltaTime;
-
-            Debug.Log(targetPositionalDifference.normalized * 5);
+            mainRigidbody.velocity = targetPositionalDifference.normalized * 200 * Time.deltaTime;
 
             //Vector3 targetRotation = Quaternion.LookRotation(targetPositionalDifference, Vector3.up).eulerAngles;
 
-            //Quaternion lookDirection = Quaternion.LookRotation(targetPositionalDifference, Vector3.up);
+            Quaternion lookDirection = Quaternion.LookRotation(-targetPositionalDifference, Vector3.up);
 
-            //armature.transform.rotation = Quaternion.Euler(lookDirection.x, 0, lookDirection.z);
+            Debug.Log(lookDirection.eulerAngles);
+
+            armature.transform.rotation = lookDirection;
+            pelvis.transform.rotation = armature.transform.rotation;
 
             //armature.transform.LookAt(waypoints[currentWaypointIndex].transform.position);
         }
@@ -126,7 +127,7 @@ public class NewRagdollState : MonoBehaviour
         }
         foreach (Rigidbody rb in ragdollParts)
         {
-            rb.isKinematic = true;
+            rb.isKinematic = false;
         }
     }
 
