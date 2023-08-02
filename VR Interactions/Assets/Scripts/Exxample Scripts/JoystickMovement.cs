@@ -9,6 +9,8 @@ public class JoystickMovement : MonoBehaviour
     public Transform centerCamera;
     public float speed;
 
+    public AudioSource walkingSteps;
+
     void Start()
     {
         
@@ -30,5 +32,14 @@ public class JoystickMovement : MonoBehaviour
         player.position += Quaternion.Euler(0, centerCamera.rotation.eulerAngles.y, 0) * new Vector3(joystickDirection.x, 0, joystickDirection.y) * Time.deltaTime;
 
         //Debug.DrawLine(player.position, player.position + Quaternion.Euler(0, centerCamera.rotation.eulerAngles.y, 0) * new Vector3(joystickDirection.x, 0, joystickDirection.y * 10));
+
+        if (joystickDirection.magnitude > 0)
+        {
+            walkingSteps.Play();
+        }
+        else
+        {
+            walkingSteps.Stop();
+        }
     }
 }
