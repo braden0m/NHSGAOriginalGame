@@ -8,11 +8,13 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     private GameObject[] ragdolls;
     private int deadRagdolls, savedRagdolls;
-    public Canvas endScreen;
+    public GameObject endScreen;
     public TextMeshProUGUI endText;
     void Start()
     {
+        instance = this;
         ragdolls = GameObject.FindGameObjectsWithTag("Ragdoll");
+        Debug.Log(ragdolls.Length);
         deadRagdolls =0;
         savedRagdolls = 0;
     }
@@ -32,7 +34,9 @@ public class GameManager : MonoBehaviour
 
     public void SaveRagdoll()
     {
+        
         savedRagdolls++;
+        Debug.Log(savedRagdolls);
         if (savedRagdolls == ragdolls.Length)
         {
             GameEnd(2);
@@ -58,8 +62,8 @@ public class GameManager : MonoBehaviour
                 endText.text = "Some ragdolls died:(";
                 break;
         }
-       
-        endScreen.enabled = true;
+        Debug.Log(caseNum);
+        endScreen.SetActive(true);
 
     }
 }

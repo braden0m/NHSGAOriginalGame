@@ -33,13 +33,19 @@ public class NewRagdollState : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        mainCollider = GetComponent<Collider>();
-        mainRigidbody = GetComponent<Rigidbody>();
+        mainCollider = armature.GetComponent<Collider>();
+        mainRigidbody = armature.GetComponent<Rigidbody>();
 
         ragdollColliders = GetComponentsInChildren<Collider>().ToList<Collider>();
         ragdollParts = GetComponentsInChildren<Rigidbody>().ToList<Rigidbody>();
 
+        ragdollParts.Remove(mainRigidbody);
+        ragdollColliders.Remove(mainCollider);
+        ragdollColliders.Remove(pelvis.GetComponent<Collider>());
+
         RagdollModeOff();
+        isGrabbed = false;
+        canInteract = true;
     }
 
     // Update is called once per frame
@@ -48,20 +54,26 @@ public class NewRagdollState : MonoBehaviour
         animator.SetBool("Running", isMoving);
 
         if (!isGrabbed && isMoving)
+        //if (true)
         {
             //transform.rotation = Quaternion.Euler(0, Mathf.Atan2(targetDifference.x, targetDifference.z) * Mathf.Rad2Deg, 0);
-            Vector3 targetPositionalDifference = waypoints[currentWaypointIndex].transform.position - transform.position;
+            Vector3 targetPositionalDifference = waypoints[currentWaypointIndex].transform.position - mainRigidbody.transform.position;
             //transform.position += targetPositionalDifference.normalized * 3 * Time.deltaTime;
+            //transform.position = Vector3.SmoothDamp(transform.position, waypoints[currentWaypointIndex].transform.position, ref currentVelocity, targetPositionalDifference.magnitude / moveSpeed);
+            mainRigidbody.velocity = targetPositionalDifference.normalized * 5 * Time.deltaTime;
 
-            transform.position = Vector3.SmoothDamp(transform.position, waypoints[currentWaypointIndex].transform.position, ref currentVelocity, targetPositionalDifference.magnitude / moveSpeed);
-            //mainRigidbody.velocity = targetPositionalDifference.normalized * 5;
+            Debug.Log(targetPositionalDifference.normalized * 5);
+
             //Vector3 targetRotation = Quaternion.LookRotation(targetPositionalDifference, Vector3.up).eulerAngles;
 
-            transform.LookAt(waypoints[currentWaypointIndex].transform);
+            Quaternion lookDirection = Quaternion.LookRotation(targetPositionalDifference, Vector3.up);
+
+            //mainRigidbody.rotation = Quaternion.Euler(lookDirection.x, 0, lookDirection.z);
         }
 
-        if (((Vector3)transform.position - (Vector3)waypoints[currentWaypointIndex].transform.position).magnitude < 1)
+        if (((Vector3)mainRigidbody.transform.position - (Vector3)waypoints[currentWaypointIndex].transform.position).magnitude < 1)
         {
+            Debug.Log("Enter");
             currentWaypointIndex = NextWaypoint();
         }
     }
@@ -114,7 +126,6 @@ public class NewRagdollState : MonoBehaviour
         {
             rb.isKinematic = true;
         }
-        mainCollider.enabled = true;
     }
 
     private void RagdollModeOn()
@@ -128,7 +139,6 @@ public class NewRagdollState : MonoBehaviour
         {
             rb.isKinematic = false;
         }
-        mainCollider.enabled = false;
     }
 
     public void InteractableHeld(SelectEnterEventArgs args)

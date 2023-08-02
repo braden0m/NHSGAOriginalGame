@@ -8,6 +8,7 @@ public class ExitScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ragdoll")
         {
+            Debug.Log("Collision");
             GameManager.instance.SaveRagdoll();
             // we dont want double collision
             collision.gameObject.SetActive(false);
