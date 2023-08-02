@@ -24,6 +24,8 @@ public class NewRagdollState : MonoBehaviour
 
     private Vector3 currentVelocity;
     private bool isGrabbed = false;
+    private Vector3 lastGrabbedLocation;
+    private Coroutine dazedCoroutine;
     [SerializeField] private bool isMoving = true;
 
     // Life Manage
@@ -51,6 +53,8 @@ public class NewRagdollState : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(lastGrabbedLocation);
+
         animator.SetBool("Running", isMoving);
 
         if (!isGrabbed && isMoving)
@@ -60,13 +64,11 @@ public class NewRagdollState : MonoBehaviour
             Vector3 targetPositionalDifference = waypoints[currentWaypointIndex].transform.position - armature.transform.position;
             //transform.position += targetPositionalDifference.normalized * 3 * Time.deltaTime;
             //transform.position = Vector3.SmoothDamp(armature.transform.position, waypoints[currentWaypointIndex].transform.position, ref currentVelocity, targetPositionalDifference.magnitude / moveSpeed);
-            mainRigidbody.velocity = targetPositionalDifference.normalized * 200 * Time.deltaTime;
+            mainRigidbody.velocity = targetPositionalDifference.normalized * 50 * Time.deltaTime;
 
             //Vector3 targetRotation = Quaternion.LookRotation(targetPositionalDifference, Vector3.up).eulerAngles;
 
             Quaternion lookDirection = Quaternion.LookRotation(-targetPositionalDifference, Vector3.up);
-
-            Debug.Log(lookDirection.eulerAngles);
 
             armature.transform.rotation = lookDirection;
             pelvis.transform.rotation = armature.transform.rotation;
@@ -96,20 +98,6 @@ public class NewRagdollState : MonoBehaviour
             }
         }
     }
-
-    IEnumerator Die()
-    {
-        //// play dying anim/particle system, tell the game manager
-        //die.Play();
-        // ! game manager
-        // can no longer do actions on them, ! maybe can put flowers lol
-        canInteract = false;
-        RagdollModeOn();
-        GameManager.instance.RagdollLife();
-        yield return new WaitForSeconds(10f);
-        mainRigidbody.gameObject.SetActive(false);
-    }
-
     private int NextWaypoint()
     {
         if (currentWaypointIndex + 1 == waypoints.Count())
@@ -151,6 +139,12 @@ public class NewRagdollState : MonoBehaviour
             isGrabbed = true;
 
             RagdollModeOn();
+
+            if (dazedCoroutine != null)
+            {
+                StopCoroutine(dazedCoroutine);
+                dazedCoroutine = null;
+            }
         }
         
     }
@@ -161,7 +155,38 @@ public class NewRagdollState : MonoBehaviour
         {
             isGrabbed = false;
 
-            RagdollModeOff();
+            if (dazedCoroutine != null)
+            {
+                StopCoroutine(dazedCoroutine);
+                dazedCoroutine = null;
+            }
+
+            dazedCoroutine = StartCoroutine(Daze());
         }
+    }
+
+    IEnumerator Die()
+    {
+        //// play dying anim/particle system, tell the game manager
+        //die.Play();
+        // ! game manager
+        // can no longer do actions on them, ! maybe can put flowers lol
+        canInteract = false;
+        RagdollModeOn();
+        GameManager.instance.RagdollLife();
+        yield return new WaitForSeconds(10f);
+        mainRigidbody.gameObject.SetActive(false);
+    }
+
+    IEnumerator Daze()
+    {
+        //Short stun right after being unheld
+
+        pelvis.transform.position = lastGrabbedLocation;
+
+        yield return new WaitForSeconds(5f);
+        RagdollModeOff();
+        mainRigidbody.velocity = Vector3.zero;
+        lastGrabbedLocation = pelvis.transform.position;
     }
 }
