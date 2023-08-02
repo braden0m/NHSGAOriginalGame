@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Breakable
   - BreakTool
+  - Fire
+  - Ragdoll
   layers:
   - Default
   - TransparentFX

@@ -23,11 +23,13 @@ public class NewRagdollState : MonoBehaviour
     private int currentWaypointIndex;
 
     private Vector3 currentVelocity;
-
     private bool isGrabbed = false;
     [SerializeField] private bool isMoving = true;
 
-    // Start is called before the first frame update
+    // Life Manage
+    private float ragAge;
+    public bool canInteract = true;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -52,9 +54,7 @@ public class NewRagdollState : MonoBehaviour
             //transform.position += targetPositionalDifference.normalized * 3 * Time.deltaTime;
 
             transform.position = Vector3.SmoothDamp(transform.position, waypoints[currentWaypointIndex].transform.position, ref currentVelocity, targetPositionalDifference.magnitude / moveSpeed);
-
             //mainRigidbody.velocity = targetPositionalDifference.normalized * 5;
-
             //Vector3 targetRotation = Quaternion.LookRotation(targetPositionalDifference, Vector3.up).eulerAngles;
 
             transform.LookAt(waypoints[currentWaypointIndex].transform);
@@ -64,6 +64,35 @@ public class NewRagdollState : MonoBehaviour
         {
             currentWaypointIndex = NextWaypoint();
         }
+    }
+
+    // Grace
+    private void OnTriggerStay(Collider other)
+    {
+        // ! add tag
+        if (other.gameObject.tag == "Fire")
+        {
+            RagdollModeOn();
+            ragAge += Time.deltaTime;
+            // fade out by falling into the ground
+            if (ragAge > 2f)
+            {
+                StartCoroutine(Die());
+            }
+        }
+    }
+
+    IEnumerator Die()
+    {
+        //// play dying anim/particle system, tell the game manager
+        //die.Play();
+        // ! game manager
+        // can no longer do actions on them, ! maybe can put flowers lol
+        canInteract = false;
+        RagdollModeOn();
+        GameManager.instance.RagdollLife();
+        yield return new WaitForSeconds(10f);
+        mainRigidbody.gameObject.SetActive(false);
     }
 
     private int NextWaypoint()
@@ -104,15 +133,22 @@ public class NewRagdollState : MonoBehaviour
 
     public void InteractableHeld(SelectEnterEventArgs args)
     {
-        isGrabbed = true;
+        if (canInteract)
+        {
+            isGrabbed = true;
 
-        RagdollModeOn();
+            RagdollModeOn();
+        }
+        
     }
 
     public void InteractableUnheld(SelectExitEventArgs args)
     {
-        isGrabbed = false;
+        if (canInteract)
+        {
+            isGrabbed = false;
 
-        RagdollModeOff();
+            RagdollModeOff();
+        }
     }
 }

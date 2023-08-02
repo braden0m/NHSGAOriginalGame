@@ -1,17 +1,7 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:VR Interactions/Assets/materials/texturemaps/stove.mat.meta
-<<<<<<< Updated upstream
-guid: 33aa5fe9bbacf0d449bf8064bea00fb7
-=======
-guid: 15b38d77ecf56412683215c7646c90b2
->>>>>>> Stashed changes
-NativeFormatImporter:
-========
-guid: 463980f4a479a4bb4b4c1e1203aee621
+guid: 97a82cd4ed8da4c5e9fd37d8353fd061
 DefaultImporter:
->>>>>>>> b4faafdee1312605efdbdd2ad531877850d96121:VR Interactions/Assets/Scenes/StartScene.unity.meta
   externalObjects: {}
-  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
