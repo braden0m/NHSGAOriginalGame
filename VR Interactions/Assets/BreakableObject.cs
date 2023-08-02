@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 public class BreakableObject : MonoBehaviour
 {
-    public float materialStrength = 100f;
+    public float materialStrength = 5f;
     private float experiencedForce;
 
     public ParticleSystem explosion;
-    BoxCollider collider;
+    Collider collider;
     MeshRenderer render;
 
     Rigidbody rb;
@@ -15,7 +15,7 @@ public class BreakableObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        collider = this.GetComponent<BoxCollider>();
+        collider = this.GetComponent<Collider>();
         render = this.GetComponent<MeshRenderer>();
         rb = GetComponent<Rigidbody>();
     }
