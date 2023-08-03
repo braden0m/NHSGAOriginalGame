@@ -77,7 +77,7 @@ public class RagdollMovement : MonoBehaviour
         //}
         if (agent.enabled)
         {
-            if (agent.remainingDistance <= agent.stoppingDistance)
+            if (agent.remainingDistance <= agent.stoppingDistance || agent.velocity.sqrMagnitude <= 0.03f)
             {
                 thisAnim.SetBool("Running", false);
             }
