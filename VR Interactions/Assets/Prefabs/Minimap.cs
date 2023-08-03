@@ -40,7 +40,7 @@ public class Minimap : MonoBehaviour
             for (int i = 0; i < trackers.Count; i++)
             {
                 Vector2 worldDifference = new Vector2(targets[i].transform.position.x - currentCamera.transform.position.x, targets[i].transform.position.z - currentCamera.transform.position.z);
-                Vector2 screenDifference = worldDifference.normalized * (worldDifference.magnitude / detectionDistance) * minimapCanvasHalfLength;
+                Vector2 screenDifference = worldDifference.normalized * (worldDifference.magnitude / detectionDistance) * minimapCanvasHalfLength * 0.01f;
 
                 print(screenDifference);
 
