@@ -87,22 +87,22 @@ public class RagdollMovement : MonoBehaviour
         }
         */
 
-        testTimer -= Time.deltaTime;
+        //testTimer -= Time.deltaTime;
 
-        if (testTimer < 0)
-        {
-            testTimer = 1f;
+        //if (testTimer < 0)
+        //{
+        //    testTimer = 1f;
 
-            if (ragdollingTest)
-            {
-                ragdollingTest = false;
-                //RagdollModeOff();
-            } else
-            {
-                ragdollingTest = true;
-                //RagdollModeOn();
-            }
-        }
+        //    if (ragdollingTest)
+        //    {
+        //        ragdollingTest = false;
+        //        //RagdollModeOff();
+        //    } else
+        //    {
+        //        ragdollingTest = true;
+        //        //RagdollModeOn();
+        //    }
+        //}
 
     }
 
