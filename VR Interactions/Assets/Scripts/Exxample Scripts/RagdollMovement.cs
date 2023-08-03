@@ -5,6 +5,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.Events;
 using UnityEditor;
 using System.Linq;
+using UnityEngine.AI; //important
 
 public class RagdollMovement : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class RagdollMovement : MonoBehaviour
     /// if its dragged, it becomes ragdoll
     /// if not dragged, using animation - may add pointing and move feature 
     /// </summary>
+    public NavMeshAgent agent;
     private bool isInitialMove, canInteract, isGrabbed;
     [SerializeField] private Rigidbody mainRb;
     [SerializeField] private GameObject thisRagdoll;
@@ -21,14 +23,15 @@ public class RagdollMovement : MonoBehaviour
     [SerializeField] private List<Rigidbody> ragdollParts;
     [SerializeField] private List<Collider> ragdollColliders;
 
-    public Collider spineCollider;
+    //public Collider spineCollider;
 
-    public List<Transform> lerpLocations;
+    //public List<Transform> lerpLocations;
     private float lerpDuration, ragAge;
-    private int count, countLerps;
-    private Coroutine currentCoroutine;
+    //private int count, countLerps;
+    public Transform startLocation;
+    //private Coroutine currentCoroutine;
 
-    public GameObject armature;
+    //public GameObject armature;
 
 
     // ragdoll movement
@@ -36,40 +39,50 @@ public class RagdollMovement : MonoBehaviour
     
     void Start()
     {
-        isInitialMove = true;
+        //isInitialMove = true;
         GetRagdollComponents();
         RagdollModeOff();
-        lerpDuration = 3f;
+        //lerpDuration = 3f;
         // store the time it can stay in the fire 
         ragAge = 0f;
-        count = 0;
-        countLerps = lerpLocations.Count;
+        //count = 0;
+        //countLerps = lerpLocations.Count;
 
         canInteract = true;
+        agent.SetDestination(startLocation.position);
+        thisAnim.SetBool("Running", true);
     }
 
     // Update is called once per frame
     void Update()
     {
+        //agent.SetDestination(startLocation.position
+        //if (isGrabbed)
+        //{
+        //    armature.transform.position = spineCollider.transform.position;
+        //}
 
-        if (isGrabbed)
+        //if (isInitialMove && !isGrabbed)
+        //{
+        //    thisAnim.SetBool("isRun", true);
+        //    // lerp between points
+        //    if (currentCoroutine == null)
+        //    {
+        //        //Continue from current position instead of last waypoint, to remove teleporting
+        //        //currentCoroutine = StartCoroutine(StartLerp(lerpLocations[count% countLerps].position, lerpLocations[(count+1)% countLerps].position));
+        //        currentCoroutine = StartCoroutine(StartLerp(mainRb.transform.position, lerpLocations[(count + 1) % countLerps].position));
+        //    }
+        //    //isInitialMove = false;
+        //    //print(isInitialMove);
+        //}
+        if (agent.enabled)
         {
-            armature.transform.position = spineCollider.transform.position;
-        }
-
-        if (isInitialMove && !isGrabbed)
-        {
-            thisAnim.SetBool("isRun", true);
-            // lerp between points
-            if (currentCoroutine == null)
+            if (agent.remainingDistance <= agent.stoppingDistance)
             {
-                //Continue from current position instead of last waypoint, to remove teleporting
-                //currentCoroutine = StartCoroutine(StartLerp(lerpLocations[count% countLerps].position, lerpLocations[(count+1)% countLerps].position));
-                currentCoroutine = StartCoroutine(StartLerp(mainRb.transform.position, lerpLocations[(count + 1) % countLerps].position));
+                thisAnim.SetBool("Running", false);
             }
-            //isInitialMove = false;
-            //print(isInitialMove);
         }
+        
     }
 
     private void GetRagdollComponents()
@@ -77,13 +90,13 @@ public class RagdollMovement : MonoBehaviour
         ragdollColliders = GetComponentsInChildren<Collider>().ToList<Collider>();
         ragdollParts = GetComponentsInChildren<Rigidbody>().ToList<Rigidbody>();
 
-        ragdollColliders.Remove(spineCollider);
+        //ragdollColliders.Remove(spineCollider);
     }
 
     private void RagdollModeOff()
     {
         thisAnim.enabled = true;
-        thisAnim.SetBool("isRun", false);
+        thisAnim.SetBool("Running", true);
         foreach (Collider ragCol in ragdollColliders)
         {
             ragCol.enabled = false;
@@ -94,6 +107,10 @@ public class RagdollMovement : MonoBehaviour
         }
         mainCollider.enabled = true;
         //mainRb.isKinematic = false;
+
+        //thisAnim.SetBool("isRun", true);
+        agent.enabled = true;
+        Debug.Log("ragdoll mode off");
     }
 
     private void RagdollModeOn()
@@ -109,6 +126,7 @@ public class RagdollMovement : MonoBehaviour
         }
         mainCollider.enabled = false;
         mainRb.isKinematic = true;
+        agent.enabled = false;
     }
 
     // vr actions
@@ -119,11 +137,11 @@ public class RagdollMovement : MonoBehaviour
             isGrabbed = true;
 
             //Stop lerp
-            if (currentCoroutine != null)
-            {
-                StopCoroutine(currentCoroutine);
-                currentCoroutine = null;
-            }
+            //if (currentCoroutine != null)
+            //{
+            //    StopCoroutine(currentCoroutine);
+            //    currentCoroutine = null;
+            //}
 
             isInitialMove = false;
             RagdollModeOn();
@@ -167,6 +185,26 @@ public class RagdollMovement : MonoBehaviour
         Destroy(thisRagdoll);
     }
 
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        // if collide on anything, stop moving
+        agent.isStopped = true;
+        // back to idling
+        thisAnim.SetBool("Running", false);
+    }
+}
+
+
+// ray cast to a random angle, get the hit distance
+// depends on how long the raycast is that collide on an object
+// if short, ray cast again 
+// the hit distance
+//RaycastHit hit;
+//Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit);
+
+
+/*
     IEnumerator StartLerp(Vector3 start, Vector3 end)
     {
         float timeElapsed = 0;
@@ -190,12 +228,4 @@ public class RagdollMovement : MonoBehaviour
 
 
     }
-}
-
-
-// ray cast to a random angle, get the hit distance
-// depends on how long the raycast is that collide on an object
-// if short, ray cast again 
-// the hit distance
-//RaycastHit hit;
-//Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit);
+    */
