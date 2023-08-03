@@ -45,13 +45,20 @@ public class InteractableEvent : MonoBehaviour
     public void InteractableHover(HoverEnterEventArgs args)
     {
         cubeRenderer.material.color = newColor;
-        StartGame();
+        RestartGame();
     }
     public void StartGame()
     {
         Debug.Log("START GAME");
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+    }
+    public void RestartGame()
+    {
+        Debug.Log("START GAME");
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
 
     }
 }
