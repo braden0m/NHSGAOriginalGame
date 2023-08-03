@@ -52,7 +52,7 @@ public class Minimap : MonoBehaviour
 
                 RectTransform trackerTransform = trackers[i].GetComponent<RectTransform>();
 
-                trackerTransform.anchoredPosition = (Vector2) (currentCamera.transform.rotation * screenDifference);
+                trackerTransform.anchoredPosition = (Vector2) (Quaternion.Euler(0, 0, currentCamera.transform.rotation.eulerAngles.y) * screenDifference);
             }
         }
     }
