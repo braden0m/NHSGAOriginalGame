@@ -23,7 +23,7 @@ public class RagdollMovement : MonoBehaviour
     [SerializeField] private List<Rigidbody> ragdollParts;
     [SerializeField] private List<Collider> ragdollColliders;
 
-    //public Collider spineCollider;
+    public Collider spineCollider;
 
     //public List<Transform> lerpLocations;
     private float lerpDuration, ragAge;
@@ -33,6 +33,8 @@ public class RagdollMovement : MonoBehaviour
 
     //public GameObject armature;
 
+    float testTimer = 1f;
+    public bool ragdollingTest = false;
 
     // ragdoll movement
     private XRBaseInteractable interactable;
@@ -75,6 +77,7 @@ public class RagdollMovement : MonoBehaviour
         //    //isInitialMove = false;
         //    //print(isInitialMove);
         //}
+        /*
         if (agent.enabled)
         {
             if (agent.remainingDistance <= agent.stoppingDistance)
@@ -82,7 +85,25 @@ public class RagdollMovement : MonoBehaviour
                 thisAnim.SetBool("Running", false);
             }
         }
-        
+        */
+
+        testTimer -= Time.deltaTime;
+
+        if (testTimer < 0)
+        {
+            testTimer = 1f;
+
+            if (ragdollingTest)
+            {
+                ragdollingTest = false;
+                //RagdollModeOff();
+            } else
+            {
+                ragdollingTest = true;
+                //RagdollModeOn();
+            }
+        }
+
     }
 
     private void GetRagdollComponents()
@@ -90,7 +111,7 @@ public class RagdollMovement : MonoBehaviour
         ragdollColliders = GetComponentsInChildren<Collider>().ToList<Collider>();
         ragdollParts = GetComponentsInChildren<Rigidbody>().ToList<Rigidbody>();
 
-        //ragdollColliders.Remove(spineCollider);
+        ragdollColliders.Remove(spineCollider);
     }
 
     private void RagdollModeOff()
@@ -115,6 +136,7 @@ public class RagdollMovement : MonoBehaviour
 
     private void RagdollModeOn()
     {
+        agent.enabled = false;
         thisAnim.enabled = false;
         foreach (Collider ragCol in ragdollColliders)
         {
@@ -126,7 +148,6 @@ public class RagdollMovement : MonoBehaviour
         }
         mainCollider.enabled = false;
         mainRb.isKinematic = true;
-        agent.enabled = false;
     }
 
     // vr actions
@@ -145,6 +166,7 @@ public class RagdollMovement : MonoBehaviour
 
             isInitialMove = false;
             RagdollModeOn();
+
         }
     }
 
@@ -185,14 +207,6 @@ public class RagdollMovement : MonoBehaviour
         Destroy(thisRagdoll);
     }
 
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        // if collide on anything, stop moving
-        agent.isStopped = true;
-        // back to idling
-        thisAnim.SetBool("Running", false);
-    }
 }
 
 

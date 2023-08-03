@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17276788, g: 0.21589147, b: 0.29782534, a: 1}
+  m_IndirectSpecularColor: {r: 0.17276844, g: 0.21589246, b: 0.2978263, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11144,7 +11144,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 428017603}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.37, y: 1.14, z: 3.48}
+  m_LocalPosition: {x: 2.7, y: 1.14, z: 8.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19095,7 +19095,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &851793244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26401,10 +26401,34 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1236595831}
+        m_TargetAssemblyTypeName: RagdollMovement, Assembly-CSharp
+        m_MethodName: InteractableHeld
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1236595831}
+        m_TargetAssemblyTypeName: RagdollMovement, Assembly-CSharp
+        m_MethodName: InteractableUnheld
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_Activated:
     m_PersistentCalls:
       m_Calls: []
@@ -27715,7 +27739,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1236595826}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: a1a3bc1db5c486b48b91e37006d498e8, type: 2}
   m_CullingMode: 0
@@ -27763,13 +27787,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 1236595830}
-  mainRb: {fileID: 1236595833}
+  mainRb: {fileID: 0}
   thisRagdoll: {fileID: 1236595826}
   thisAnim: {fileID: 1236595829}
   mainCollider: {fileID: 1236595832}
   ragdollParts: []
   ragdollColliders: []
+  spineCollider: {fileID: 1147164996}
   startLocation: {fileID: 428017604}
+  ragdollingTest: 0
 --- !u!65 &1236595832
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27783,7 +27809,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 3.3147573, z: 1}
   m_Center: {x: 0, y: 1.157378, z: 0}
---- !u!54 &1236595833
+--- !u!54 &1236595835
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -27797,7 +27823,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1001 &1246704535
 PrefabInstance:
@@ -34769,7 +34795,9 @@ MonoBehaviour:
   mainCollider: {fileID: 0}
   ragdollParts: []
   ragdollColliders: []
+  spineCollider: {fileID: 0}
   startLocation: {fileID: 0}
+  ragdollingTest: 0
 --- !u!95 &1446317020
 Animator:
   serializedVersion: 5
