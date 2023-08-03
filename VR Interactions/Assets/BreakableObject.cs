@@ -7,6 +7,7 @@ public class BreakableObject : MonoBehaviour
     private float experiencedForce;
 
     public ParticleSystem explosion;
+    public AudioSource explosionSound;
     Collider collider;
     MeshRenderer render;
 
