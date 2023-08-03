@@ -8,6 +8,7 @@ public class Minimap : MonoBehaviour
 
     public float detectionDistance = 10f;
 
+    [SerializeField] private GameObject VRPlayerRig;
     [SerializeField] private GameObject minimapCanvas;
     [SerializeField] private GameObject trackerPrefab;
     [SerializeField] private Camera currentCamera;
@@ -20,8 +21,13 @@ public class Minimap : MonoBehaviour
 
     void Start()
     {
+        detectionDistance = 5f;
+
         lastTargetAmount = 0;
         minimapCanvasHalfLength = minimapCanvas.GetComponent<RectTransform>().rect.width / 2;
+
+        VRPlayerRig = GameObject.FindGameObjectWithTag("VRPlayer");
+        currentCamera = VRPlayerRig.transform.Find("TrackingSpace").transform.Find("CenterEyeAnchor").GetComponent<Camera>();
     }
 
     void Update()
@@ -44,7 +50,9 @@ public class Minimap : MonoBehaviour
 
                 print(screenDifference);
 
-                trackers[i].transform.position = (Vector2) (currentCamera.transform.rotation * screenDifference) + new Vector2(minimapCanvasHalfLength, minimapCanvasHalfLength);
+                RectTransform trackerTransform = trackers[i].GetComponent<RectTransform>();
+
+                trackerTransform.anchoredPosition = (Vector2) (Quaternion.Euler(0, 0, currentCamera.transform.rotation.eulerAngles.y) * screenDifference);
             }
         }
     }
@@ -53,7 +61,7 @@ public class Minimap : MonoBehaviour
     {
         List<GameObject> result = new List<GameObject>();
 
-        foreach (GameObject val in GameObject.FindGameObjectsWithTag("Burnable"))
+        foreach (GameObject val in GameObject.FindGameObjectsWithTag("Fire"))
         {
             Vector2 worldDifference = new Vector2(val.transform.position.x - currentCamera.transform.position.x, val.transform.position.z - currentCamera.transform.position.z);
 
