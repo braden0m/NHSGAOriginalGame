@@ -36,7 +36,10 @@ public class JoystickMovement : MonoBehaviour
         //Debug.Log(joystickDirection.magnitude);
         if (joystickDirection.magnitude > 0)
         {
-            walkingSteps.Play();
+            if (!walkingSteps.isPlaying)
+            {
+                walkingSteps.Play();
+            }
         }
         else
         {
