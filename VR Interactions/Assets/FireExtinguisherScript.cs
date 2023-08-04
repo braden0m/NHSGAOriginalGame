@@ -9,7 +9,8 @@ public class FireExtinguisherScript : MonoBehaviour
     private Renderer cubeRenderer;
     private Color originalColor;
     [SerializeField] private ParticleSystem spray;
-    [SerializeField] private Color newColor;
+    [SerializeField] private AudioSource spraySound;
+    [SerializeField] private Color hoverColor;
 
     private bool held = false;
     private bool spraying = false;
@@ -23,26 +24,28 @@ public class FireExtinguisherScript : MonoBehaviour
     }
     private void Update()
     {
-        spray.gameObject.SetActive(spraying);
-
         if (spraying)
         {
             print("SPRAY");
-            spray.Play();
+            //spray.Play();
         }
         else
         {
-            spray.Stop();
+            //spray.Stop();
         }
     }
     public void InteractableActivate(ActivateEventArgs args)
     {
         spraying = true;
+        spray.Play();
+        spraySound.Play();
     }
 
     public void InteractableDeactivate(DeactivateEventArgs args)
     {
         spraying = false;
+        spray.Stop();
+        spraySound.Stop();
     }
     public void InteractableHeld(SelectEnterEventArgs args)
     {
@@ -59,7 +62,7 @@ public class FireExtinguisherScript : MonoBehaviour
     {
         if (!held)
         {
-            cubeRenderer.material.color = newColor;
+            cubeRenderer.material.color = hoverColor;
         }
     }
     public void InteractableUnhover(HoverExitEventArgs args)

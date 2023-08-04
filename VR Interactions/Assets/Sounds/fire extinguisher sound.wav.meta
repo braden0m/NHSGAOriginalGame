@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:VR Interactions/Assets/Sound/Music/full song.wav.meta
-guid: 95458c11f1d4f402398515ca7f209d9f
-========
-guid: 7fc07b4574929684e97d69b830cc5559
->>>>>>>> DavidStuff2:VR Interactions/Assets/Sounds/Ragdoll death sound.wav.meta
+guid: ae5dbea06371d584985a936758af9cdf
 AudioImporter:
   externalObjects: {}
   serializedVersion: 6
