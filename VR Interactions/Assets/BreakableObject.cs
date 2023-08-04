@@ -66,8 +66,10 @@ public class BreakableObject : MonoBehaviour
         render.enabled = false;
         collider.enabled = false;
 
-        explosion.Play();
+        Debug.Log("explosion played");
 
+        explosion.Play();
+        explosionSound.Play();
         yield return new WaitForSeconds(6f);
 
         Destroy(gameObject);
