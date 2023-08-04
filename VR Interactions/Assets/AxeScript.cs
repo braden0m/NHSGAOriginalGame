@@ -6,6 +6,8 @@ public class AxeScript : MonoBehaviour
 {
     public float createdForce;
     private Rigidbody rb;
+    private BoxCollider collider;
+    private ParticleSystem thisParticleSystem;
 
     private Vector3 customVelocity;
     private Vector3 customAngularVelocity;
@@ -22,6 +24,8 @@ public class AxeScript : MonoBehaviour
         lastRotation = transform.rotation.eulerAngles;
         currentRotation = transform.rotation.eulerAngles;
 
+        collider = GetComponent<BoxCollider>();
+        thisParticleSystem = GetComponentInChildren<ParticleSystem>();
 
         rb = GetComponent<Rigidbody>();
     }
@@ -35,9 +39,26 @@ public class AxeScript : MonoBehaviour
         customVelocity = currentPosition - lastPosition;
         customAngularVelocity = currentRotation - lastRotation;
 
-        createdForce = Mathf.Abs(customVelocity.magnitude * 2 + customAngularVelocity.magnitude);
+        createdForce = Mathf.Abs(customVelocity.magnitude * 3 + customAngularVelocity.magnitude);
 
         lastPosition = currentPosition;
         lastRotation = transform.rotation.eulerAngles;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Breakable") && collision.gameObject.GetComponentInChildren<ParticleSystem>())
+        {
+            ParticleSystem targetParticle = collision.gameObject.GetComponentInChildren<ParticleSystem>();
+            Material targetMaterial = targetParticle.GetComponentInChildren<Renderer>().material;
+
+            thisParticleSystem.GetComponent<Renderer>().material = targetMaterial;
+
+            //lower durability
+
+            BreakableObject targetBreakScript = collision.gameObject.GetComponent<BreakableObject>();
+            targetBreakScript.materialStrength -= createdForce * 0.7f;
+        }
+        
     }
 }

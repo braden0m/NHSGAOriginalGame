@@ -31,30 +31,23 @@ public class BreakableObject : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<AxeScript>() != null)
+        if (collision.gameObject.CompareTag("BreakTool") && collision.gameObject.GetComponent<AxeScript>() != null)
         {
             float createdForce = collision.gameObject.GetComponent<AxeScript>().createdForce;
-            if (createdForce != null)
-            {
-                if (collision.gameObject.CompareTag("BreakTool"))
-                {
-                    print(experiencedForce + createdForce);
+            print(experiencedForce + createdForce);
 
-                    if (experiencedForce + createdForce > materialStrength)
-                    {
-                        print("Break");
-                        StartCoroutine(Explode());
-                    }
-                }
+            if (experiencedForce + createdForce > materialStrength)
+            {
+                print("Break");
+                StartCoroutine(Explode());
             }
-            else
+        }
+        else
+        {
+            if (experiencedForce > materialStrength)
             {
-
-                if (experiencedForce > materialStrength)
-                {
-                    print("Break");
-                    StartCoroutine(Explode());
-                }
+                print("Break");
+                StartCoroutine(Explode());
             }
         }
     }
