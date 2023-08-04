@@ -33,6 +33,7 @@ public class JoystickMovement : MonoBehaviour
 
         //Debug.DrawLine(player.position, player.position + Quaternion.Euler(0, centerCamera.rotation.eulerAngles.y, 0) * new Vector3(joystickDirection.x, 0, joystickDirection.y * 10));
 
+        Debug.Log(joystickDirection.magnitude);
         if (joystickDirection.magnitude > 0)
         {
             walkingSteps.Play();
