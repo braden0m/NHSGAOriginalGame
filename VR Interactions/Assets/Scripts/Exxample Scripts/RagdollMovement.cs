@@ -14,6 +14,7 @@ public class RagdollMovement : MonoBehaviour
     /// if its dragged, it becomes ragdoll
     /// if not dragged, using animation - may add pointing and move feature 
     /// </summary>
+    /*
     public NavMeshAgent agent;
     private bool isInitialMove, canInteract, isGrabbed;
     [SerializeField] private Rigidbody mainRb;
@@ -38,12 +39,20 @@ public class RagdollMovement : MonoBehaviour
 
     // ragdoll movement
     private XRBaseInteractable interactable;
-    
+
+    */
+    private bool canInteract;
+    private float ragAge;
+    public Material burnMaterial;
+    [SerializeField] Color originalColor, transparentColor;
+    [SerializeField] Color newColor;
+    [SerializeField] private SkinnedMeshRenderer ragDoll;
+
     void Start()
     {
         //isInitialMove = true;
-        GetRagdollComponents();
-        RagdollModeOff();
+        //GetRagdollComponents();
+        //RagdollModeOff();
         //lerpDuration = 3f;
         // store the time it can stay in the fire 
         ragAge = 0f;
@@ -51,61 +60,62 @@ public class RagdollMovement : MonoBehaviour
         //countLerps = lerpLocations.Count;
 
         canInteract = true;
-        agent.SetDestination(startLocation.position);
-        thisAnim.SetBool("Running", true);
+        //agent.SetDestination(startLocation.position);
+        //thisAnim.SetBool("Running", true);
     }
 
     // Update is called once per frame
-    void Update()
+    //void Update()
+    //{
+    //agent.SetDestination(startLocation.position
+    //if (isGrabbed)
+    //{
+    //    armature.transform.position = spineCollider.transform.position;
+    //}
+
+    //if (isInitialMove && !isGrabbed)
+    //{
+    //    thisAnim.SetBool("isRun", true);
+    //    // lerp between points
+    //    if (currentCoroutine == null)
+    //    {
+    //        //Continue from current position instead of last waypoint, to remove teleporting
+    //        //currentCoroutine = StartCoroutine(StartLerp(lerpLocations[count% countLerps].position, lerpLocations[(count+1)% countLerps].position));
+    //        currentCoroutine = StartCoroutine(StartLerp(mainRb.transform.position, lerpLocations[(count + 1) % countLerps].position));
+    //    }
+    //    //isInitialMove = false;
+    //    //print(isInitialMove);
+    //}
+
+    /*
+    if (agent.enabled)
     {
-        //agent.SetDestination(startLocation.position
-        //if (isGrabbed)
-        //{
-        //    armature.transform.position = spineCollider.transform.position;
-        //}
-
-        //if (isInitialMove && !isGrabbed)
-        //{
-        //    thisAnim.SetBool("isRun", true);
-        //    // lerp between points
-        //    if (currentCoroutine == null)
-        //    {
-        //        //Continue from current position instead of last waypoint, to remove teleporting
-        //        //currentCoroutine = StartCoroutine(StartLerp(lerpLocations[count% countLerps].position, lerpLocations[(count+1)% countLerps].position));
-        //        currentCoroutine = StartCoroutine(StartLerp(mainRb.transform.position, lerpLocations[(count + 1) % countLerps].position));
-        //    }
-        //    //isInitialMove = false;
-        //    //print(isInitialMove);
-        //}
-        /*
-        if (agent.enabled)
+        if (agent.remainingDistance <= agent.stoppingDistance || agent.velocity.sqrMagnitude <= 0.03f)
         {
-            if (agent.remainingDistance <= agent.stoppingDistance || agent.velocity.sqrMagnitude <= 0.03f)
-            {
-                thisAnim.SetBool("Running", false);
-            }
+            thisAnim.SetBool("Running", false);
         }
-        */
-
-        //testTimer -= Time.deltaTime;
-
-        //if (testTimer < 0)
-        //{
-        //    testTimer = 1f;
-
-        //    if (ragdollingTest)
-        //    {
-        //        ragdollingTest = false;
-        //        //RagdollModeOff();
-        //    } else
-        //    {
-        //        ragdollingTest = true;
-        //        //RagdollModeOn();
-        //    }
-        //}
-
     }
+     */
 
+    //testTimer -= Time.deltaTime;
+
+    //if (testTimer < 0)
+    //{
+    //    testTimer = 1f;
+
+    //    if (ragdollingTest)
+    //    {
+    //        ragdollingTest = false;
+    //        //RagdollModeOff();
+    //    } else
+    //    {
+    //        ragdollingTest = true;
+    //        //RagdollModeOn();
+    //    }
+    //}
+
+
+    /*
     private void GetRagdollComponents()
     {
         ragdollColliders = GetComponentsInChildren<Collider>().ToList<Collider>();
@@ -150,48 +160,59 @@ public class RagdollMovement : MonoBehaviour
         mainRb.isKinematic = true;
     }
 
+    */
+
     // vr actions
-    public void InteractableHeld(SelectEnterEventArgs args)
-    {
-        if (canInteract)
-        {
-            isGrabbed = true;
+    //public void InteractableHeld(SelectEnterEventArgs args)
+    //{
+    //    if (canInteract)
+    //    {
+    //        //isGrabbed = true;
 
-            //Stop lerp
-            //if (currentCoroutine != null)
-            //{
-            //    StopCoroutine(currentCoroutine);
-            //    currentCoroutine = null;
-            //}
+    //        //Stop lerp
+    //        //if (currentCoroutine != null)
+    //        //{
+    //        //    StopCoroutine(currentCoroutine);
+    //        //    currentCoroutine = null;
+    //        //}
 
-            isInitialMove = false;
-            RagdollModeOn();
+    //        //isInitialMove = false;
+    //        //RagdollModeOn();
 
-        }
-    }
+    //    }
+    //}
 
-    public void InteractableUnheld(SelectExitEventArgs args)
-    {
-        if (canInteract)
-        {
-            isGrabbed = false;
-            isInitialMove = false;
-            RagdollModeOff();
+    //public void InteractableUnheld(SelectExitEventArgs args)
+    //{
+    //    if (canInteract)
+    //    {
+    //        isGrabbed = false;
+    //        isInitialMove = false;
+    //        RagdollModeOff();
 
-        }
-    }
+    //    }
+    //}
 
     private void OnTriggerStay(Collider other)
     {
         // ! add tag
+        
         if (other.gameObject.tag == "Fire")
         {
-            RagdollModeOn();
+            //RagdollModeOn();
             ragAge += Time.deltaTime;
+            //Debug.Log(ragAge);
+            Color lerpedColor = Color.Lerp(originalColor, newColor, ragAge/10f);
+            ragDoll.materials[1].color = lerpedColor;
+            //burnMaterial.color = lerpedColor;
             // fade out by falling into the ground
-            if (ragAge > 2f)
+            if (ragAge > 10f)
             {
-                StartCoroutine(Die());
+                Debug.Log("DIE");
+                canInteract = false;
+                ragDoll.materials[0].color = transparentColor;
+                ragDoll.materials[1].color = transparentColor;
+                //StartCoroutine(Die());
             }
         }
     }
@@ -204,7 +225,7 @@ public class RagdollMovement : MonoBehaviour
         // can no longer do actions on them, ! maybe can put flowers lol
         canInteract = false;
         yield return new WaitForSeconds(10f);
-        Destroy(thisRagdoll);
+        //Destroy(thisRagdoll);
     }
 
 }

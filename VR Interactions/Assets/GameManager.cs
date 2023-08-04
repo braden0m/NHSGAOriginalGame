@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
     private GameObject[] ragdolls;
     private int deadRagdolls, savedRagdolls;
     public GameObject endScreen;
-    public TextMeshProUGUI endText;
+
+    [SerializeField] private GameStateSO gameStateSO;
     void Start()
     {
         instance = this;
@@ -34,7 +35,6 @@ public class GameManager : MonoBehaviour
 
     public void SaveRagdoll()
     {
-        
         savedRagdolls++;
         Debug.Log(savedRagdolls);
         if (savedRagdolls == ragdolls.Length)
@@ -50,20 +50,9 @@ public class GameManager : MonoBehaviour
 
     private void GameEnd(int caseNum)
     {
-        switch (caseNum)
-        {
-            case 1:
-                endText.text = "All ragdolls Died :(";
-                break;
-            case 2:
-                endText.text = "All ragdolls saved:)";
-                break;
-            case 3:
-                endText.text = "Some ragdolls died:(";
-                break;
-        }
-        Debug.Log(caseNum);
-        endScreen.SetActive(true);
-
+        gameStateSO.gameCase = caseNum;
+        gameStateSO.ragdollSaved = savedRagdolls;
+        gameStateSO.ragdollTotal = ragdolls.Length;
+        SceneManager.LoadScene("WinLoseScene");
     }
 }
