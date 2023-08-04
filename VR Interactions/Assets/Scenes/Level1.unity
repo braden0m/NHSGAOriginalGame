@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17276844, g: 0.21589246, b: 0.2978263, a: 1}
+  m_IndirectSpecularColor: {r: 0.17276788, g: 0.21589147, b: 0.29782534, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6554,7 +6554,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 931ffa309c8df7449b155bf2055f8275,
         type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 931ffa309c8df7449b155bf2055f8275,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d8a86fcf13179493f8a0df1395e2499e, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 931ffa309c8df7449b155bf2055f8275,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: d8a86fcf13179493f8a0df1395e2499e, type: 2}
     - target: {fileID: 919132149155446097, guid: 931ffa309c8df7449b155bf2055f8275,
@@ -7181,6 +7191,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5580804225716830, guid: 55bea62ca65ed6240ad84bc002eab72f, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5580804225716830, guid: 55bea62ca65ed6240ad84bc002eab72f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 70cf10c343f8f50408ed7726eb21f7ff, type: 2}
+    - target: {fileID: 5580804225716830, guid: 55bea62ca65ed6240ad84bc002eab72f, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5ceecbc9e9d274e91bc007b0e24c587f, type: 2}
     - target: {fileID: 438535579517000663, guid: 55bea62ca65ed6240ad84bc002eab72f,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -26442,6 +26464,22 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 147616176}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1147164999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1147164993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf99b5d77d3494f1ebbaf9604e277f89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  burnMaterial: {fileID: 2100000, guid: 5ceecbc9e9d274e91bc007b0e24c587f, type: 2}
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
+  newColor: {r: 0, g: 0, b: 0, a: 0.80784315}
+  ragDoll: {fileID: 1645320350}
 --- !u!1 &1150041974
 GameObject:
   m_ObjectHideFlags: 0
@@ -28166,9 +28204,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: c984ceaa99d5a48aeabd6e5ebf28311c,
         type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: c984ceaa99d5a48aeabd6e5ebf28311c,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f69a9badab52b48449211bac7f865e34, type: 2}
+    - target: {fileID: -7511558181221131132, guid: c984ceaa99d5a48aeabd6e5ebf28311c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5ceecbc9e9d274e91bc007b0e24c587f, type: 2}
     - target: {fileID: 919132149155446097, guid: c984ceaa99d5a48aeabd6e5ebf28311c,
         type: 3}
       propertyPath: m_Name
@@ -34722,16 +34770,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf99b5d77d3494f1ebbaf9604e277f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  mainRb: {fileID: 0}
-  thisRagdoll: {fileID: 0}
-  thisAnim: {fileID: 0}
-  mainCollider: {fileID: 0}
-  ragdollParts: []
-  ragdollColliders: []
-  spineCollider: {fileID: 0}
-  startLocation: {fileID: 0}
-  ragdollingTest: 0
+  burnMaterial: {fileID: 0}
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
+  newColor: {r: 0, g: 0, b: 0, a: 0}
+  ragDoll: {fileID: 0}
 --- !u!95 &1446317020
 Animator:
   serializedVersion: 5
@@ -36286,6 +36328,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1639196047}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!137 &1645320350 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5580804225716830, guid: 55bea62ca65ed6240ad84bc002eab72f,
+    type: 3}
+  m_PrefabInstance: {fileID: 147616176}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1645464367
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54354,7 +54402,7 @@ PrefabInstance:
     - target: {fileID: 3274614302845535890, guid: a145c2cd67fc88246bbd947ee1a4f00a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.06
+      value: 5.3
       objectReference: {fileID: 0}
     - target: {fileID: 3274614302845535890, guid: a145c2cd67fc88246bbd947ee1a4f00a,
         type: 3}
@@ -54364,7 +54412,7 @@ PrefabInstance:
     - target: {fileID: 3274614302845535890, guid: a145c2cd67fc88246bbd947ee1a4f00a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.56
+      value: 3.98
       objectReference: {fileID: 0}
     - target: {fileID: 3274614302845535890, guid: a145c2cd67fc88246bbd947ee1a4f00a,
         type: 3}
