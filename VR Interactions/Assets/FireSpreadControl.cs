@@ -12,7 +12,7 @@ public class FireSpreadControl : MonoBehaviour
     public int fireDirectionResolution = 8;
     public int maxSurroundingFire = 5;
     public float spreadDistance = 2f;
-    public float spreadTime = 2f;
+    public float spreadTime = 3f;
 
     private float spreadCooldown;
 
@@ -35,7 +35,7 @@ public class FireSpreadControl : MonoBehaviour
         
         if (spreadCooldown < 0 && fireSpreadCoroutine == null)
         {
-            spreadCooldown = 1f;
+            spreadCooldown = spreadTime;
 
             fireSpreadCoroutine = StartCoroutine(ActiveFireSpread());
         }
@@ -117,9 +117,11 @@ public class FireSpreadControl : MonoBehaviour
     {
         int currentFire = activeFire.Count();
 
+        List<GameObject> nextWaveFire = new List<GameObject>(activeFire);
+
         for (int i = currentFire - 1; i >= 0; i--)
         {
-            SingularFireSpread(activeFire[i]);
+            SingularFireSpread(nextWaveFire[i]);
             yield return null;
 
             if (activeFire.Count() - i == 0)

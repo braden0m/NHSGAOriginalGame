@@ -9083,7 +9083,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &851793244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9103,7 +9103,7 @@ MonoBehaviour:
   fireDirectionResolution: 8
   maxSurroundingFire: 5
   spreadDistance: 1
-  spreadTime: 15
+  spreadTime: 10
 --- !u!4 &851793245
 Transform:
   m_ObjectHideFlags: 0
@@ -11738,8 +11738,8 @@ Transform:
   - {fileID: 418746659}
   - {fileID: 1678417663}
   - {fileID: 543450652269696716}
-  - {fileID: 552719355}
   - {fileID: 1559614863}
+  - {fileID: 552719355}
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
