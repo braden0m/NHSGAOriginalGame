@@ -5,7 +5,6 @@ public class BreakableObject : MonoBehaviour
 {
     public float materialStrength = 5f;
     private float experiencedForce;
-    private List<GameObject> mainInteactableScriptList;
 
     public ParticleSystem explosion;
     public AudioSource explosionSound;
@@ -19,21 +18,14 @@ public class BreakableObject : MonoBehaviour
     {
         collider = this.GetComponent<Collider>();
         render = this.GetComponent<MeshRenderer>();
-
-        mainInteactableScriptList = GameObject.Find("InteractableController").GetComponent<InteractableMainScript>().allInteractables;
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (rb != null)
-        {
-            experiencedForce = Mathf.Abs(rb.velocity.magnitude * 2 + rb.angularVelocity.magnitude);
-        }
-        else
-        {
-            rb = GetComponent<Rigidbody>();
-        }
+
+        experiencedForce = Mathf.Abs(rb.velocity.magnitude * 2 + rb.angularVelocity.magnitude);
 
         //print(experiencedForce);
     }
@@ -63,33 +55,15 @@ public class BreakableObject : MonoBehaviour
     {
         print("Destroying");
 
-        rb = GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.constraints = RigidbodyConstraints.FreezeAll;
-        }
-
+        rb.constraints = RigidbodyConstraints.FreezeAll;
         render.enabled = false;
         collider.enabled = false;
 
         Debug.Log("explosion played");
 
-        explosion = gameObject.GetComponentInChildren<ParticleSystem>();
-        if (explosion != null)
-        {
-            explosion.Play();
-        }
-
-        if (explosionSound != null)
-        {
-            explosionSound.Play();
-        }
+        explosion.Play();
+        explosionSound.Play();
         yield return new WaitForSeconds(6f);
-
-        if (mainInteactableScriptList.Contains(this.gameObject))
-        {
-            mainInteactableScriptList.Remove(this.gameObject);
-        }
 
         Destroy(gameObject);
     }
