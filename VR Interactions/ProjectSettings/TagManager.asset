@@ -9,6 +9,7 @@ TagManager:
   - Fire
   - Ragdoll
   - VRPlayer
+  - Smoke
   layers:
   - Default
   - TransparentFX

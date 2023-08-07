@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     private int deadRagdolls, savedRagdolls;
     public GameObject endScreen;
     public AudioSource deathSound;
+
+    public int currentLevel;
+
     [SerializeField] private GameStateSO gameStateSO;
     void Start()
     {
@@ -55,6 +58,7 @@ public class GameManager : MonoBehaviour
         gameStateSO.gameCase = caseNum;
         gameStateSO.ragdollSaved = savedRagdolls;
         gameStateSO.ragdollTotal = ragdolls.Length;
+        gameStateSO.currentLevel = currentLevel;
         SceneManager.LoadScene("WinLoseScene");
     }
 }

@@ -8,4 +8,5 @@ public class GameStateSO : ScriptableObject
     public int gameCase;
     public int ragdollSaved;
     public int ragdollTotal;
+    public int currentLevel;
 }
