@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4970529176964051147}
   - component: {fileID: 9876587324682449}
   - component: {fileID: -7195943646473790580}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: FruitBowl
   m_TagString: Breakable
   m_Icon: {fileID: 0}

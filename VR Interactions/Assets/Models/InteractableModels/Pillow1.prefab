@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5236893261506842249}
   - component: {fileID: 6876076395603301110}
   - component: {fileID: 6876076395603301109}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Pillow1
   m_TagString: Breakable
   m_Icon: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4998467786873187571}
   - component: {fileID: 7114254412383508537}
   - component: {fileID: 3255228951122781399}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CoffeeMachine
   m_TagString: Breakable
   m_Icon: {fileID: 0}
