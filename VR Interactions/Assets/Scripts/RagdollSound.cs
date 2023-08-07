@@ -6,10 +6,11 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class RagdollSound : MonoBehaviour
 {
     public AudioSource dragRag;
+    public AudioSource miSound;
     public void InteractableHeld(SelectEnterEventArgs args)
     {
+        miSound.Stop();
         dragRag.Play();
     }
 
-    
 }

@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     private GameObject[] ragdolls;
     private int deadRagdolls, savedRagdolls;
     public GameObject endScreen;
-
+    public AudioSource deathSound;
     [SerializeField] private GameStateSO gameStateSO;
     void Start()
     {
@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     public void RagdollLife()
     {
         deadRagdolls++;
+        // play deathsound here since sometimes you haven't seen the ragdoll but they already died
+        deathSound.Play();
         if (deadRagdolls == ragdolls.Length)
         {
             GameEnd(1);

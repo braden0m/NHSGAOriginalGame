@@ -196,24 +196,31 @@ public class RagdollMovement : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         // ! add tag
-        
+        if (ragAge > 10f)
+        {
+            Debug.Log("DIE");
+            // want this to be only called once.
+            if (canInteract)
+            {
+                canInteract = false;
+                ragDoll.materials[0].color = transparentColor;
+                ragDoll.materials[1].color = transparentColor;
+                GameManager.instance.RagdollLife();
+                return;
+            }
+            
+            //StartCoroutine(Die());
+        }
+        Debug.Log("hha");
         if (other.gameObject.tag == "Fire")
         {
             //RagdollModeOn();
             ragAge += Time.deltaTime;
-            //Debug.Log(ragAge);
+            Debug.Log(ragAge);
             Color lerpedColor = Color.Lerp(originalColor, newColor, ragAge/10f);
-            ragDoll.materials[1].color = lerpedColor;
+            ragDoll.materials[0].color = lerpedColor;
             //burnMaterial.color = lerpedColor;
             // fade out by falling into the ground
-            if (ragAge > 10f)
-            {
-                Debug.Log("DIE");
-                canInteract = false;
-                ragDoll.materials[0].color = transparentColor;
-                ragDoll.materials[1].color = transparentColor;
-                //StartCoroutine(Die());
-            }
         }
     }
 
