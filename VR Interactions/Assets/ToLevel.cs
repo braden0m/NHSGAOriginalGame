@@ -55,6 +55,6 @@ public class ToLevel : MonoBehaviour
 
     public void ToNextLevel()
     {
-        SceneManager.LoadScene("Level" + gameStateSO.currentLevel);
+        SceneManager.LoadScene("Level" + (gameStateSO.currentLevel + 1));
     }
 }
