@@ -24019,6 +24019,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e36dfb91a981940cdb64f6508f558c03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeProfile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
+  originalColor: {r: 1, g: 0.3066038, b: 0.3066038, a: 1}
+  newColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!65 &1870355609
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 221285138}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5841806, y: 2.0114353, z: 0.52595043}
+  m_Center: {x: -0.045197606, y: 0.018057942, z: -0.0031085014}
 --- !u!1 &1874187295
 GameObject:
   m_ObjectHideFlags: 0
