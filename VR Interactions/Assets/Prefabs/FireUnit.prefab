@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3274614302845535889}
   - component: {fileID: 3274614302845535888}
   - component: {fileID: 3274614302845535919}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FireUnit
   m_TagString: Fire
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3274614302845535918}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 7.04, y: 1.413, z: -2.82}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
@@ -4780,7 +4780,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 23d1d096c3c4bc642ace4cf26ec8350f, type: 2}
+  - {fileID: 2100000, guid: fbbaa368f209a51488553fd5af0c82b6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

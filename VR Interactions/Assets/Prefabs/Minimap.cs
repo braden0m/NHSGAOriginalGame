@@ -48,7 +48,7 @@ public class Minimap : MonoBehaviour
                 Vector2 worldDifference = new Vector2(targets[i].transform.position.x - currentCamera.transform.position.x, targets[i].transform.position.z - currentCamera.transform.position.z);
                 Vector2 screenDifference = worldDifference.normalized * (worldDifference.magnitude / detectionDistance) * minimapCanvasHalfLength;
 
-                print(screenDifference);
+                //print(screenDifference);
 
                 RectTransform trackerTransform = trackers[i].GetComponent<RectTransform>();
 

@@ -60,6 +60,7 @@ public class RagdollMovement : MonoBehaviour
         //countLerps = lerpLocations.Count;
 
         canInteract = true;
+        //ragDoll.materials[1] = 
         //agent.SetDestination(startLocation.position);
         //thisAnim.SetBool("Running", true);
     }
@@ -198,7 +199,7 @@ public class RagdollMovement : MonoBehaviour
         // ! add tag
         if (ragAge > 10f)
         {
-            Debug.Log("DIE");
+            //Debug.Log("DIE");
             // want this to be only called once.
             if (canInteract)
             {
@@ -211,14 +212,14 @@ public class RagdollMovement : MonoBehaviour
             
             //StartCoroutine(Die());
         }
-        Debug.Log("hha");
+        //Debug.Log("hha");
         if (other.gameObject.tag == "Fire")
         {
             //RagdollModeOn();
             ragAge += Time.deltaTime;
-            Debug.Log(ragAge);
+            //Debug.Log(ragAge);
             Color lerpedColor = Color.Lerp(originalColor, newColor, ragAge/10f);
-            ragDoll.materials[0].color = lerpedColor;
+            ragDoll.materials[1].color = lerpedColor;
             //burnMaterial.color = lerpedColor;
             // fade out by falling into the ground
         }
