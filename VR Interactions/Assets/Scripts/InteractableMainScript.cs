@@ -25,7 +25,7 @@ public class InteractableMainScript : MonoBehaviour
             //Debug.Log(materialList.Length - 2);
 
             //print(materialList.Length - 2);
-            Material objectMaterial = materialList[0];
+            //Material objectMaterial = materialList[0];
 
             if (value.gameObject.GetComponent<Rigidbody>() == null)
             {
@@ -42,7 +42,7 @@ public class InteractableMainScript : MonoBehaviour
                 GameObject createdParticleObject = Instantiate(shardParticle, value.transform);
                 ParticleSystem createdParticleSystem = createdParticleObject.GetComponent<ParticleSystem>();
                 Renderer createdParticleRenderer = createdParticleSystem.GetComponent<Renderer>();
-                createdParticleRenderer.material = objectMaterial;
+                createdParticleRenderer.material = value.gameObject.GetComponent<MeshRenderer>().material;
             }
 
 
@@ -54,7 +54,7 @@ public class InteractableMainScript : MonoBehaviour
                 AudioClip selectedClip = audioClips[0];
                 foreach (AudioClip clip in audioClips)
                 {
-                    if (clip.name == objectMaterial.name + "Break")
+                    if (clip.name == value.gameObject.GetComponent<MeshRenderer>().material.name + "Break")
                     {
                         selectedClip = clip;
                         break;
