@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3195764515861000855}
   - component: {fileID: 3195764515861000852}
   - component: {fileID: 3195764515861000853}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Cactus
   m_TagString: Breakable
   m_Icon: {fileID: 0}

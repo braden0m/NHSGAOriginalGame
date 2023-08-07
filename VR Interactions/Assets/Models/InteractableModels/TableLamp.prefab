@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3118693339005206071}
   - component: {fileID: 3118693339005206064}
   - component: {fileID: 3118693339005206065}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: TableLamp
   m_TagString: Breakable
   m_Icon: {fileID: 0}

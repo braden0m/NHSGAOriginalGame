@@ -7,7 +7,7 @@ public class AxeScript : MonoBehaviour
     public float createdForce;
     private Rigidbody rb;
     private BoxCollider collider;
-    private ParticleSystem thisParticleSystem;
+    [SerializeField] private ParticleSystem thisParticleSystem;
 
     private Vector3 customVelocity;
     private Vector3 customAngularVelocity;
@@ -58,6 +58,8 @@ public class AxeScript : MonoBehaviour
 
             BreakableObject targetBreakScript = collision.gameObject.GetComponent<BreakableObject>();
             targetBreakScript.materialStrength -= createdForce * 0.7f;
+
+            thisParticleSystem.Play();
         }
         
     }
