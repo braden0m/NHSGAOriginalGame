@@ -9015,7 +9015,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 851793243}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e62ff6c82d97be42a3746d1b53a816c, type: 3}
   m_Name: 
@@ -24000,9 +24000,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e36dfb91a981940cdb64f6508f558c03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeProfile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
-  originalColor: {r: 1, g: 0.3066038, b: 0.3066038, a: 1}
-  newColor: {r: 0, g: 1, b: 0.42460012, a: 1}
+  globalVolume: {fileID: 832575517}
+  originalColor: {r: 1, g: 0, b: 0, a: 1}
+  newColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!65 &1870355609
 BoxCollider:
   m_ObjectHideFlags: 0
