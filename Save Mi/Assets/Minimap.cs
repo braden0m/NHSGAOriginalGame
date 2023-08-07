@@ -44,7 +44,7 @@ public class Minimap : MonoBehaviour
 
                 print(screenDifference);
 
-                trackers[i].transform.position = screenDifference + new Vector2(minimapCanvasHalfLength, minimapCanvasHalfLength);
+                trackers[i].transform.position = (Vector2) (currentCamera.transform.rotation * screenDifference) + new Vector2(minimapCanvasHalfLength, minimapCanvasHalfLength);
             }
         }
     }

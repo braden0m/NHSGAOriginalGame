@@ -8,6 +8,8 @@ TagManager:
   - BreakTool
   - Fire
   - Ragdoll
+  - VRPlayer
+  - Smoke
   layers:
   - Default
   - TransparentFX
@@ -15,10 +17,10 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - TopLayer
+  - Camera
+  - Interactable
+  - Environment
   - 
   - 
   - 
@@ -44,4 +46,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Bruh
+    uniqueID: 3638917299
     locked: 0
