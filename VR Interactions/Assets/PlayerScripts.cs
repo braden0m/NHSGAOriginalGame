@@ -18,9 +18,9 @@ public class PlayerScripts : MonoBehaviour
         
     }
 
-    private void OnTriggerStay(Collision collision)
+    private void OnTriggerStay(Collider other)
     {
-        if (collision.gameObject.CompareTag("Smoke"))
+        if (other.gameObject.CompareTag("Smoke"))
         {
             print("In smoke");
         }
