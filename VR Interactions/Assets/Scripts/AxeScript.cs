@@ -58,6 +58,8 @@ public class AxeScript : MonoBehaviour
 
             BreakableObject targetBreakScript = collision.gameObject.GetComponent<BreakableObject>();
             targetBreakScript.materialStrength -= createdForce * 0.7f;
+
+            thisParticleSystem.Play();
         }
         
     }

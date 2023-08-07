@@ -80,6 +80,7 @@ public class BreakableObject : MonoBehaviour
             explosion.Play();
         }
 
+        explosionSound = gameObject.GetComponent<AudioSource>();
         if (explosionSound != null)
         {
             explosionSound.Play();
