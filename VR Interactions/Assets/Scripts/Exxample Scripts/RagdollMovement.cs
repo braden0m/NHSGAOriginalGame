@@ -60,6 +60,7 @@ public class RagdollMovement : MonoBehaviour
         //countLerps = lerpLocations.Count;
 
         canInteract = true;
+        //ragDoll.materials[1] = 
         //agent.SetDestination(startLocation.position);
         //thisAnim.SetBool("Running", true);
     }
@@ -218,7 +219,7 @@ public class RagdollMovement : MonoBehaviour
             ragAge += Time.deltaTime;
             Debug.Log(ragAge);
             Color lerpedColor = Color.Lerp(originalColor, newColor, ragAge/10f);
-            ragDoll.materials[0].color = lerpedColor;
+            ragDoll.materials[1].color = lerpedColor;
             //burnMaterial.color = lerpedColor;
             // fade out by falling into the ground
         }
