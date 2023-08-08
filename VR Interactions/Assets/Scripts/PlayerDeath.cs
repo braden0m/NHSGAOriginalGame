@@ -34,7 +34,7 @@ public class PlayerDeath : MonoBehaviour
         //{
         //    lerpTime -= Time.deltaTime;
         //}
-        float newIntensity = Mathf.Lerp(0.7f, 1.0f, (float)Math.Sin(lerpTime/6f)/2f+0.5f);
+        float newIntensity = Mathf.Lerp(0f, 1.0f, (float)Math.Sin(lerpTime/6f)/2f+0.5f);
         VolumeManager.instance.stack.GetComponent<Vignette>().intensity = new ClampedFloatParameter(newIntensity, 0f, 1f, true);
         Debug.Log(newIntensity);
     }

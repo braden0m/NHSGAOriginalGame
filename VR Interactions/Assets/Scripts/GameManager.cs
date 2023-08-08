@@ -25,9 +25,11 @@ public class GameManager : MonoBehaviour
 
     public void RagdollLife()
     {
+
         deadRagdolls++;
         // play deathsound here since sometimes you haven't seen the ragdoll but they already died
         deathSound.Play();
+        Debug.Log(deadRagdolls);
         if (deadRagdolls == ragdolls.Length)
         {
             GameEnd(1);
