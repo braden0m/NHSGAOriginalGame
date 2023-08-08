@@ -68,7 +68,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 64c37f05a14674f6eaf487a874ab520a, type: 2}
+  - {fileID: 2100000, guid: fbbaa368f209a51488553fd5af0c82b6, type: 2}
+  - {fileID: 2100000, guid: b0e093d1f3a2ace429e4ec45a1eea60e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -134,6 +135,9 @@ MonoBehaviour:
   materialStrength: 20
   explosion: {fileID: 3118693338586033284}
   explosionSound: {fileID: 0}
+  breakable: 0
+  burnable: 0
+  burntColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &3118693339005206065
 MonoBehaviour:
   m_ObjectHideFlags: 0
