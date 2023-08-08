@@ -91,7 +91,7 @@ public class FireSpreadControl : MonoBehaviour
 
                 Vector3 rayDirection = Quaternion.Euler(0, (360 / fireDirectionResolution * i), 0) * transform.forward;
 
-                Physics.Raycast(fireSeed.transform.position, rayDirection, out nextFireRay, fireSpreadDistance);
+                Physics.Raycast(fireSeed.transform.position + new Vector3(0, 1, 0), rayDirection, out nextFireRay, fireSpreadDistance);
 
                 if (nextFireRay.collider == null)
                 {
