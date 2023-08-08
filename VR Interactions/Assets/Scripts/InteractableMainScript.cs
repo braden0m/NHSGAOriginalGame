@@ -32,12 +32,19 @@ public class InteractableMainScript : MonoBehaviour
                 value.gameObject.AddComponent<Rigidbody>();
             }
 
+            //value.gameObject.GetComponent<UnityEngine.XR.Interaction.Toolkit.XRGrabInteractable>();
+
             if (value.gameObject.GetComponentInChildren<ParticleSystem>() == null)
             {
                 GameObject createdParticleObject = Instantiate(shardParticle, value.transform);
                 ParticleSystem createdParticleSystem = createdParticleObject.GetComponent<ParticleSystem>();
                 Renderer createdParticleRenderer = createdParticleSystem.GetComponent<Renderer>();
                 createdParticleRenderer.material = objectMaterial;
+            }
+
+            if (value.gameObject.GetComponentInChildren<AudioSource>() != null)
+            {
+                value.gameObject.GetComponentInChildren<AudioSource>().playOnAwake = false;
             }
 
             if (value.gameObject.GetComponent<BreakableObject>() == null)

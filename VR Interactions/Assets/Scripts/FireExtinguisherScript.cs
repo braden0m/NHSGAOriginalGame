@@ -9,6 +9,9 @@ public class FireExtinguisherScript : MonoBehaviour
     private Renderer cubeRenderer;
     [SerializeField] private ParticleSystem spray;
     [SerializeField] private AudioSource spraySound;
+    [SerializeField] private RectTransform waterLevelBar;
+
+    [SerializeField] private float waterlevel;
 
     private bool held = false;
     private bool spraying = false;
@@ -18,18 +21,44 @@ public class FireExtinguisherScript : MonoBehaviour
     {
         interactable = GetComponent<XRBaseInteractable>();
         cubeRenderer = GetComponent<Renderer>();
+
+        waterlevel = 1;
     }
-    private void Update()
+    private void FixedUpdate()
     {
-        if (spraying)
+        waterLevelBar.localPosition = new Vector3(0, (1 - waterlevel) / 2, 0);
+        waterLevelBar.localScale = new Vector3(1, waterlevel, 1);
+
+        if (spraying && waterlevel > 0)
         {
-            print("SPRAY");
-            //spray.Play();
+            waterlevel -= 0.01f;
+
+            RaycastHit2D rayhit = Physics2D.Raycast(spray.transform.position, spray.transform.forward, 5);
+
+            if (rayhit.collider != null && rayhit.collider.gameObject.CompareTag("Fire"))
+            {
+                Destroy(rayhit.collider.gameObject);
+            }
+
         }
-        else
+
+        /*
+        if (!died && barrelHit.collider != null && barrelHit.collider.gameObject.CompareTag("Enemy") && !(skippedBarrels.Exists(x => x == barrelHit.collider.gameObject)))
         {
-            //spray.Stop();
+            StartCoroutine(ShowObtainedScore(barrelHit.point, 100, false));
+
+            skippedBarrels.Add(barrelHit.collider.gameObject);
         }
+        else if (died && barrelHit.collider != null && barrelHit.collider.gameObject.CompareTag("Bottom"))
+        {
+            if (!splashed)
+            {
+                splashed = true;
+                Instantiate(splash, transform.position, Quaternion.identity);
+            }
+        }
+
+        */
     }
     public void InteractableActivate(ActivateEventArgs args)
     {
