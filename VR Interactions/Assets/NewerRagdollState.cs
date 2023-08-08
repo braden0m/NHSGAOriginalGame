@@ -18,25 +18,26 @@ public class NewerRagdollState : MonoBehaviour
     [SerializeField] private List<Rigidbody> ragdollParts;
     [SerializeField] private List<Collider> ragdollColliders;
 
-    public List<Transform> waypoints;
     private int currentWaypointIndex;
 
     private Vector3 currentVelocity;
     private bool isGrabbed = false;
     private Vector3 lastGrabbedLocation;
     private Coroutine dazedCoroutine;
-    [SerializeField] private bool isMoving = true;
+    [SerializeField] private bool isMoving = false;
 
     // Life Manage
     private float ragAge;
     public bool canInteract = true;
+    public bool isRagdoll;
+    private bool previousIsRagdoll;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
-        mainCollider = armature.GetComponent<Collider>();
-        mainRigidbody = armature.GetComponent<Rigidbody>();
+        mainCollider = GetComponent<Collider>();
+        mainRigidbody = GetComponent<Rigidbody>();
 
         ragdollColliders = GetComponentsInChildren<Collider>().ToList<Collider>();
         ragdollParts = GetComponentsInChildren<Rigidbody>().ToList<Rigidbody>();
@@ -48,12 +49,29 @@ public class NewerRagdollState : MonoBehaviour
         RagdollModeOff();
         isGrabbed = false;
         canInteract = true;
+
+        previousIsRagdoll = isRagdoll;
+
+        //mainCollider.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        animator.SetBool("Running", isMoving);
+
+        if (isRagdoll != previousIsRagdoll)
+        {
+            if (isRagdoll)
+            {
+                RagdollModeOn();
+            }
+            else
+            {
+                RagdollModeOff();
+            }
+        }
+        previousIsRagdoll = isRagdoll;
     }
 
     public void InteractableHeld(SelectEnterEventArgs args)
@@ -91,6 +109,8 @@ public class NewerRagdollState : MonoBehaviour
 
     private void RagdollModeOff()
     {
+        mainRigidbody.constraints = RigidbodyConstraints.None;
+        mainCollider.enabled = true;
         animator.enabled = true;
         foreach (Collider ragCol in ragdollColliders)
         {
@@ -104,6 +124,8 @@ public class NewerRagdollState : MonoBehaviour
 
     private void RagdollModeOn()
     {
+        mainRigidbody.constraints = RigidbodyConstraints.FreezeAll;
+        mainCollider.enabled = false;
         animator.enabled = false;
         foreach (Collider ragCol in ragdollColliders)
         {
