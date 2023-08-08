@@ -9,6 +9,7 @@ public class FireExtinguisherScript : MonoBehaviour
     private Renderer cubeRenderer;
     [SerializeField] private ParticleSystem spray;
     [SerializeField] private AudioSource spraySound;
+    [SerializeField] private GameObject waterDisplay;
     [SerializeField] private RectTransform waterLevelBar;
 
     [SerializeField] private float waterlevel;
@@ -21,25 +22,35 @@ public class FireExtinguisherScript : MonoBehaviour
     {
         interactable = GetComponent<XRBaseInteractable>();
         cubeRenderer = GetComponent<Renderer>();
-
-        waterlevel = 1;
     }
     private void FixedUpdate()
     {
-        waterLevelBar.localPosition = new Vector3(0, (1 - waterlevel) / 2, 0);
-        waterLevelBar.localScale = new Vector3(1, waterlevel, 1);
+        waterDisplay.SetActive(held);
+        waterLevelBar.localPosition = new Vector3(0, (3 - waterlevel) / 6, 0);
+        waterLevelBar.localScale = new Vector3(1, waterlevel / 3, 1);
 
-        if (spraying && waterlevel > 0)
+        if (spraying && waterlevel > 0 && held)
         {
+            spray.Play();
+            spraySound.Play();
+
             waterlevel -= 0.01f;
 
-            RaycastHit2D rayhit = Physics2D.Raycast(spray.transform.position, spray.transform.forward, 5);
+            RaycastHit rayhit;
+            Physics.Raycast(spray.transform.position, spray.transform.forward, out rayhit, 4);
 
-            if (rayhit.collider != null && rayhit.collider.gameObject.CompareTag("Fire"))
+            if (rayhit.collider != null)
             {
-                Destroy(rayhit.collider.gameObject);
+                if (rayhit.collider.gameObject.CompareTag("Fire"))
+                {
+                    Destroy(rayhit.collider.gameObject);
+                }
             }
 
+        } else
+        {
+            spray.Stop();
+            spraySound.Stop();
         }
 
         /*
@@ -63,15 +74,11 @@ public class FireExtinguisherScript : MonoBehaviour
     public void InteractableActivate(ActivateEventArgs args)
     {
         spraying = true;
-        spray.Play();
-        spraySound.Play();
     }
 
     public void InteractableDeactivate(DeactivateEventArgs args)
     {
         spraying = false;
-        spray.Stop();
-        spraySound.Stop();
     }
     public void InteractableHeld(SelectEnterEventArgs args)
     {
