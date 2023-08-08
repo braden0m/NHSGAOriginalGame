@@ -7,7 +7,10 @@ public class AxeScript : MonoBehaviour
     public float createdForce;
     private Rigidbody rb;
     private BoxCollider collider;
-    [SerializeField] private ParticleSystem thisParticleSystem;
+    private ParticleSystem thisParticleSystem;
+
+    [SerializeField] private AudioClip[] breakClips;
+    private AudioSource breakSound;
 
     private Vector3 customVelocity;
     private Vector3 customAngularVelocity;
@@ -26,6 +29,7 @@ public class AxeScript : MonoBehaviour
 
         collider = GetComponent<BoxCollider>();
         thisParticleSystem = GetComponentInChildren<ParticleSystem>();
+        breakSound = GetComponent<AudioSource>();
 
         rb = GetComponent<Rigidbody>();
     }
@@ -58,6 +62,12 @@ public class AxeScript : MonoBehaviour
 
             BreakableObject targetBreakScript = collision.gameObject.GetComponent<BreakableObject>();
             targetBreakScript.materialStrength -= createdForce * 0.7f;
+
+            if (targetBreakScript.materialStrength > 0)
+            {
+                breakSound.clip = breakClips[0];
+                breakSound.Play();
+            }
 
             thisParticleSystem.Play();
         }
