@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3938611513743128352}
   - component: {fileID: 1246429489026352106}
   - component: {fileID: 6374201201119559954}
-  - component: {fileID: -1461232448220325362}
   m_Layer: 0
   m_Name: bowl
   m_TagString: Breakable
@@ -103,17 +102,3 @@ MonoBehaviour:
   breakable: 0
   burnable: 0
   burntColor: {r: 0, g: 0, b: 0, a: 0}
---- !u!64 &-1461232448220325362
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 742189538735252031}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2542112853833809232, guid: 259c57b7dd6044f0190d196df75f320c, type: 3}

@@ -91,7 +91,7 @@ public class FireSpreadControl : MonoBehaviour
 
                 Vector3 rayDirection = Quaternion.Euler(0, (360 / fireDirectionResolution * i), 0) * transform.forward;
 
-                Physics.Raycast(fireSeed.transform.position, rayDirection, out nextFireRay, fireSpreadDistance);
+                Physics.Raycast(fireSeed.transform.position + new Vector3(0, 1, 0), rayDirection, out nextFireRay, fireSpreadDistance);
 
                 if (nextFireRay.collider == null)
                 {
@@ -157,19 +157,29 @@ public class FireSpreadControl : MonoBehaviour
 
     IEnumerator ActiveFireSpread()
     {
-        int currentFire = activeFire.Count();
-        List<GameObject> nextWaveFire = new List<GameObject>(activeFire);
+        int currentFire = allFire.Count();
+        int i = 0;
 
+        //List<GameObject> nextWaveFire = new List<GameObject>(allFire);
+
+        while (i < allFire.Count())
+        {
+            SingularFireSpread(allFire[i]);
+            yield return null;
+        }
+
+        /*
         for (int i = currentFire - 1; i >= 0; i--)
         {
             SingularFireSpread(nextWaveFire[i]);
             yield return null;
 
-            if (activeFire.Count() - i == 0)
+            if (allFire.Count() - i == 0)
             {
                 break;
             }
         }
+        */
 
         fireSpreadCoroutine = null;
     }

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4164378716204649480}
   - component: {fileID: 2174727523265657026}
   - component: {fileID: 6715529111313183031}
-  - component: {fileID: -6247453385470659875}
   m_Layer: 0
   m_Name: dino
   m_TagString: Breakable
@@ -104,17 +103,3 @@ MonoBehaviour:
   breakable: 0
   burnable: 0
   burntColor: {r: 0, g: 0, b: 0, a: 0}
---- !u!64 &-6247453385470659875
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 373468199215962391}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -3860872208478788586, guid: 13c8d506df18c4020806292e50900e7e, type: 3}
