@@ -7,10 +7,8 @@ public class FireExtinguisherScript : MonoBehaviour
 {
     private XRBaseInteractable interactable;
     private Renderer cubeRenderer;
-    private Color originalColor;
     [SerializeField] private ParticleSystem spray;
     [SerializeField] private AudioSource spraySound;
-    [SerializeField] private Color hoverColor;
 
     private bool held = false;
     private bool spraying = false;
@@ -20,7 +18,6 @@ public class FireExtinguisherScript : MonoBehaviour
     {
         interactable = GetComponent<XRBaseInteractable>();
         cubeRenderer = GetComponent<Renderer>();
-        originalColor = cubeRenderer.material.color;
     }
     private void Update()
     {
@@ -50,23 +47,10 @@ public class FireExtinguisherScript : MonoBehaviour
     public void InteractableHeld(SelectEnterEventArgs args)
     {
         held = true;
-        cubeRenderer.material.color = originalColor;
     }
 
     public void InteractableUnheld(SelectExitEventArgs args)
     {
         held = false;
-        cubeRenderer.material.color = originalColor;
-    }
-    public void InteractableHover(HoverEnterEventArgs args)
-    {
-        if (!held)
-        {
-            cubeRenderer.material.color = hoverColor;
-        }
-    }
-    public void InteractableUnhover(HoverExitEventArgs args)
-    {
-        cubeRenderer.material.color = originalColor;
     }
 }

@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aae790e139c007458f88296264ef885, type: 3}
   m_Name: GameStateSO
   m_EditorClassIdentifier: 
-  gameCase: 0
+  gameCase: 2
+  ragdollSaved: 2
+  ragdollTotal: 2
+  currentLevel: 0
