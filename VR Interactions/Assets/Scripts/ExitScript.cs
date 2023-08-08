@@ -10,8 +10,9 @@ public class ExitScript : MonoBehaviour
         {
             Debug.Log("Collision");
             GameManager.instance.SaveRagdoll();
+            collision.gameObject.transform.position = new Vector3(100f,100f,100f);
             // we dont want double collision
-            collision.gameObject.SetActive(false);
+            //collision.gameObject.SetActive(false);
         }
     }
 }
