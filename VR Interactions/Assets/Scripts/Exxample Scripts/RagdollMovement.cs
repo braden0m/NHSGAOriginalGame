@@ -209,7 +209,7 @@ public class RagdollMovement : MonoBehaviour
                 //ragDoll.materials[0].color = transparentColor;
                 //ragDoll.materials[1].color = transparentColor;
                 GameManager.instance.RagdollLife();
-                this.gameObject.GetComponent<Collider>().enabled = false;
+                this.gameObject.GetComponent<XRGrabInteractable>().enabled = false;
                 //StartCoroutine(Die());
                 return;
             }
@@ -219,7 +219,7 @@ public class RagdollMovement : MonoBehaviour
         {
             //RagdollModeOn();
             ragAge += Time.deltaTime;
-            Debug.Log(ragAge);
+            //Debug.Log(ragAge);
             Color lerpedColor = Color.Lerp(originalColor, newColor, ragAge / 10f);
             ragDoll.materials[1].color = lerpedColor;
             //burnMaterial.color = lerpedColor;
