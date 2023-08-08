@@ -43,12 +43,11 @@ public class RagdollMovement : MonoBehaviour
     */
     private bool canInteract;
     private float ragAge;
-    public Material burnMaterial;
     [SerializeField] Color originalColor, transparentColor;
     [SerializeField] Color newColor;
     [SerializeField] private SkinnedMeshRenderer ragDoll;
     [SerializeField]
-    private XRGrabInteractable xrGrab;
+    //private XRGrabInteractable xrGrab;
     void Start()
     {
         //isInitialMove = true;
@@ -197,6 +196,7 @@ public class RagdollMovement : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        Debug.Log("hha");
         // ! add tag
         if (ragAge > 10f)
         {
@@ -212,33 +212,33 @@ public class RagdollMovement : MonoBehaviour
                 this.gameObject.GetComponent<Collider>().enabled = false;
                 //StartCoroutine(Die());
                 return;
+            }
         }
-        //Debug.Log("hha");
+            //Debug.Log("hha");
         if (other.gameObject.tag == "Fire")
         {
             //RagdollModeOn();
             ragAge += Time.deltaTime;
-                return;
-            }
-            //Debug.Log(ragAge);
-            Color lerpedColor = Color.Lerp(originalColor, newColor, ragAge/10f);
+            Debug.Log(ragAge);
+            Color lerpedColor = Color.Lerp(originalColor, newColor, ragAge / 10f);
             ragDoll.materials[1].color = lerpedColor;
             //burnMaterial.color = lerpedColor;
             // fade out by falling into the ground
         }
-    }
+        
 
-    IEnumerator Die()
-    {
-        //// play dying anim/particle system, tell the game manager
-        //die.Play();
-        // ! game manager
-        // can no longer do actions on them, ! maybe can put flowers lol
-        canInteract = false;
-        yield return new WaitForSeconds(10f);
-        //Destroy(thisRagdoll);
-    }
+        //IEnumerator Die()
+        //{
+        //    //// play dying anim/particle system, tell the game manager
+        //    //die.Play();
+        //    // ! game manager
+        //    // can no longer do actions on them, ! maybe can put flowers lol
+        //    canInteract = false;
+        //    yield return new WaitForSeconds(10f);
+        //    //Destroy(thisRagdoll);
+        //}
 
+    }
 }
 
 
