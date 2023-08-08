@@ -47,7 +47,8 @@ public class RagdollMovement : MonoBehaviour
     [SerializeField] Color originalColor, transparentColor;
     [SerializeField] Color newColor;
     [SerializeField] private SkinnedMeshRenderer ragDoll;
-
+    [SerializeField]
+    private XRGrabInteractable xrGrab;
     void Start()
     {
         //isInitialMove = true;
@@ -204,19 +205,21 @@ public class RagdollMovement : MonoBehaviour
             if (canInteract)
             {
                 canInteract = false;
-                ragDoll.materials[0].color = transparentColor;
-                ragDoll.materials[1].color = transparentColor;
+                // xr interactable set to inactive
+                //ragDoll.materials[0].color = transparentColor;
+                //ragDoll.materials[1].color = transparentColor;
                 GameManager.instance.RagdollLife();
+                this.gameObject.GetComponent<Collider>().enabled = false;
+                //StartCoroutine(Die());
                 return;
-            }
-            
-            //StartCoroutine(Die());
         }
         //Debug.Log("hha");
         if (other.gameObject.tag == "Fire")
         {
             //RagdollModeOn();
             ragAge += Time.deltaTime;
+                return;
+            }
             //Debug.Log(ragAge);
             Color lerpedColor = Color.Lerp(originalColor, newColor, ragAge/10f);
             ragDoll.materials[1].color = lerpedColor;
