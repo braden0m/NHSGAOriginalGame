@@ -15336,7 +15336,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 851793243}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e62ff6c82d97be42a3746d1b53a816c, type: 3}
   m_Name: 
@@ -35042,6 +35042,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1162432944}
     m_Modifications:
+    - target: {fileID: 7114254412383508537, guid: 74650229c654af4479a9e7adc8ebf87d,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7114254412383508537, guid: 74650229c654af4479a9e7adc8ebf87d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: -876546973899608171, guid: 23500eaa6474752478398c6532af4b3b,
+        type: 3}
     - target: {fileID: 8282617163747959638, guid: 74650229c654af4479a9e7adc8ebf87d,
         type: 3}
       propertyPath: m_RootOrder
