@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 410087040}
-  m_IndirectSpecularColor: {r: 0.17276788, g: 0.21589147, b: 0.29782534, a: 1}
+  m_IndirectSpecularColor: {r: 0.172768, g: 0.21589169, b: 0.29782546, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5813,6 +5813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03be8ec1daf4434499efe96fcbf37592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireControl: {fileID: 851793244}
   spray: {fileID: 573329733}
   spraySound: {fileID: 993816759}
   waterDisplay: {fileID: 96147551}
@@ -12918,12 +12919,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf99b5d77d3494f1ebbaf9604e277f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  burnMaterial: {fileID: 2100000, guid: 5ceecbc9e9d274e91bc007b0e24c587f, type: 2}
   originalColor: {r: 0, g: 0, b: 0, a: 0}
   transparentColor: {r: 0, g: 0, b: 0, a: 0}
   newColor: {r: 0, g: 0, b: 0, a: 0.80784315}
   ragDoll: {fileID: 1272427347}
-  xrGrab: {fileID: 0}
 --- !u!114 &605105512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17051,7 +17050,7 @@ Transform:
   - {fileID: 543450652269350710}
   - {fileID: 1430841252}
   m_Father: {fileID: 1162432944}
-  m_RootOrder: 76
+  m_RootOrder: 73
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &976411662
 GameObject:
@@ -18963,12 +18962,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf99b5d77d3494f1ebbaf9604e277f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  burnMaterial: {fileID: 2100000, guid: 5ceecbc9e9d274e91bc007b0e24c587f, type: 2}
   originalColor: {r: 0, g: 0, b: 0, a: 0}
   transparentColor: {r: 0, g: 0, b: 0, a: 0}
   newColor: {r: 0, g: 0, b: 0, a: 0.58431375}
   ragDoll: {fileID: 1645320350}
-  xrGrab: {fileID: 0}
 --- !u!1 &1150041974
 GameObject:
   m_ObjectHideFlags: 0
@@ -19249,9 +19246,9 @@ Transform:
   - {fileID: 43254544}
   - {fileID: 665774000}
   - {fileID: 435189358}
+  - {fileID: 969161221}
   - {fileID: 7852419535702964864}
   - {fileID: 8465497433137249847}
-  - {fileID: 969161221}
   - {fileID: 4861524230929557981}
   - {fileID: 818307849}
   - {fileID: 557913177}
@@ -29558,7 +29555,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 26
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1001 &1721313676
 PrefabInstance:
@@ -33102,7 +33099,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 27
+  m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2069921619
 GameObject:

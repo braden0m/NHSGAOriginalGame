@@ -7,6 +7,7 @@ public class FireExtinguisherScript : MonoBehaviour
 {
     private XRBaseInteractable interactable;
     private Renderer cubeRenderer;
+    [SerializeField] private FireSpreadControl fireControl;
     [SerializeField] private ParticleSystem spray;
     [SerializeField] private AudioSource spraySound;
     [SerializeField] private GameObject waterDisplay;
@@ -43,6 +44,7 @@ public class FireExtinguisherScript : MonoBehaviour
             {
                 if (rayhit.collider.gameObject.CompareTag("Fire"))
                 {
+                    fireControl.allFire.Remove(rayhit.collider.gameObject);
                     Destroy(rayhit.collider.gameObject);
                 }
             }
