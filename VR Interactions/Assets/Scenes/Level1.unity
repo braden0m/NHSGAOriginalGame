@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 410087040}
-  m_IndirectSpecularColor: {r: 0.17276844, g: 0.21589246, b: 0.2978263, a: 1}
+  m_IndirectSpecularColor: {r: 0.172768, g: 0.21589169, b: 0.29782546, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7254,7 +7254,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 23d1d096c3c4bc642ace4cf26ec8350f, type: 2}
+  - {fileID: 2100000, guid: d5af1a20a73a02547acf30aaab7f6ddb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14081,6 +14081,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97516663a7e974cf1877575a5ba6a00e, type: 3}
+--- !u!4 &803331620 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 97516663a7e974cf1877575a5ba6a00e,
+    type: 3}
+  m_PrefabInstance: {fileID: 803331619}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &816232175 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3274614302845535918, guid: a145c2cd67fc88246bbd947ee1a4f00a,
@@ -16063,6 +16069,7 @@ Transform:
   - {fileID: 1876082071}
   - {fileID: 543450652269350710}
   - {fileID: 1420194731}
+  - {fileID: 803331620}
   m_Father: {fileID: 1162432944}
   m_RootOrder: 70
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
