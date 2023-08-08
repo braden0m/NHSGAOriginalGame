@@ -24,11 +24,11 @@ public class MenuStart : MonoBehaviour
     void Update()
     {
         cubeRenderer.material.color = Color.Lerp(inactiveColor, activeColor, timer/heldTimeRequired);
-
+        Debug.Log(held);
         if (held)
         {
             timer += Time.deltaTime;
-
+            Debug.Log(timer);
             if (timer > heldTimeRequired)
             {
                 StartGame();
