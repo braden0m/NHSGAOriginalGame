@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5029011222755190909}
   - component: {fileID: 7074684724368006327}
   - component: {fileID: 6766683116071900553}
+  - component: {fileID: -5434889831643662189}
   m_Layer: 0
   m_Name: cup
   m_TagString: Breakable
@@ -102,3 +103,17 @@ MonoBehaviour:
   breakable: 0
   burnable: 0
   burntColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!64 &-5434889831643662189
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8732101678263303522}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4169469977941244475, guid: d2af813caba4941bc882ff1d089e5673, type: 3}

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3494142107588972372}
   - component: {fileID: 1700488130840476574}
   - component: {fileID: 1504915563284155935}
+  - component: {fileID: -8854715752170785855}
   m_Layer: 0
   m_Name: teddybear
   m_TagString: Breakable
@@ -103,3 +104,17 @@ MonoBehaviour:
   breakable: 0
   burnable: 0
   burntColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!64 &-8854715752170785855
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 907937678969543243}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1192793174529486723, guid: 90529408cbf08432392e92475e0b102c, type: 3}

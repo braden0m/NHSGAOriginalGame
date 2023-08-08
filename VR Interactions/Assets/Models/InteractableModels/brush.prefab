@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4263366539275155717}
   - component: {fileID: 2075721885183167951}
   - component: {fileID: 6754303324087251370}
+  - component: {fileID: 1127491003363935203}
   m_Layer: 0
   m_Name: brush
   m_TagString: Breakable
@@ -102,3 +103,17 @@ MonoBehaviour:
   breakable: 0
   burnable: 0
   burntColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!64 &1127491003363935203
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562543678044204058}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4442491034012161948, guid: b92a97eccbd3f448ca3afcb1bda6f5c4, type: 3}
