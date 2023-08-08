@@ -32,36 +32,12 @@ public class InteractableMainScript : MonoBehaviour
                 value.gameObject.AddComponent<Rigidbody>();
             }
 
-            if (value.gameObject.GetComponent<UnityEngine.XR.Interaction.Toolkit.XRGrabInteractable>() == null)
-            {
-                value.gameObject.AddComponent<UnityEngine.XR.Interaction.Toolkit.XRGrabInteractable>();
-            }
-
             if (value.gameObject.GetComponentInChildren<ParticleSystem>() == null)
             {
                 GameObject createdParticleObject = Instantiate(shardParticle, value.transform);
                 ParticleSystem createdParticleSystem = createdParticleObject.GetComponent<ParticleSystem>();
                 Renderer createdParticleRenderer = createdParticleSystem.GetComponent<Renderer>();
                 createdParticleRenderer.material = objectMaterial;
-            }
-
-
-            if (value.gameObject.GetComponent<AudioSource>() == null)
-            {
-                AudioSource newAudio = value.gameObject.AddComponent<AudioSource>();
-                newAudio.maxDistance = 3;
-
-                AudioClip selectedClip = audioClips[0];
-                foreach (AudioClip clip in audioClips)
-                {
-                    if (clip.name == objectMaterial.name + "Break")
-                    {
-                        selectedClip = clip;
-                        break;
-                    }
-                }
-
-                newAudio.clip = selectedClip;
             }
 
             if (value.gameObject.GetComponent<BreakableObject>() == null)
