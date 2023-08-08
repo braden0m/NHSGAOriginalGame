@@ -15,12 +15,13 @@ public class PlayerDeath : MonoBehaviour
     private Vignette vignetteProfile;
     private float playerAge;
     private bool stayInFire;
-    private float lerpTime;
+    private float lerpTime, addTime, newIntensity;
 
     [SerializeField] Color originalColor, newColor;
 
     void Start()
     {
+        addTime = 1f;
         playerAge = 0f;
         stayInFire = false;
         lerpTime = 5f;
@@ -28,13 +29,10 @@ public class PlayerDeath : MonoBehaviour
 
     public void ChangeVignette()
     {
-        //if (lerpTime / 5f<1.0f)
-        lerpTime += Time.deltaTime;
-        //else
-        //{
-        //    lerpTime -= Time.deltaTime;
-        //}
-        float newIntensity = Mathf.Lerp(0f, 1.0f, (float)Math.Sin(lerpTime/6f)/2f+0.5f);
+        if (newIntensity > 1.0f || newIntensity < 0f)
+            addTime = -addTime;
+        newIntensity += addTime*Time.deltaTime;
+        //float newIntensity = Mathf.Lerp(0f, 1.0f, (float)Math.Sin(lerpTime)/2f+0.5f);
         VolumeManager.instance.stack.GetComponent<Vignette>().intensity = new ClampedFloatParameter(newIntensity, 0f, 1f, true);
         Debug.Log(newIntensity);
     }
@@ -69,10 +67,10 @@ public class PlayerDeath : MonoBehaviour
         //    vignetteProfile.active = true;
         //}
 
-        if (playerAge > 10f)
+        if (playerAge > 20f)
         {
             Debug.Log("Player DIE");
-            VolumeManager.instance.stack.GetComponent<Vignette>().intensity = new ClampedFloatParameter(0, 0, 1f, true);
+            VolumeManager.instance.stack.GetComponent<Vignette>().intensity = new ClampedFloatParameter(1, 0, 1f, true);
             return;
             // want this to be only called once.
             //StartCoroutine(Die());
@@ -80,10 +78,11 @@ public class PlayerDeath : MonoBehaviour
         
         if (other.gameObject.tag == "Fire")
         {
-            
+            Debug.Log(playerAge);
             playerAge += Time.deltaTime;
             VolumeManager.instance.stack.GetComponent<Vignette>().color = new ColorParameter(Color.Lerp(originalColor, newColor, playerAge/10f), true);
             //Debug.Log(playerAge);
+            
             ChangeVignette();
             stayInFire = true;
         }
