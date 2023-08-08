@@ -6,11 +6,17 @@ public class BreakableObject : MonoBehaviour
     public float materialStrength = 5f;
     private float experiencedForce;
     private List<GameObject> mainInteactableScriptList;
+    private Color originalColor;
 
     public ParticleSystem explosion;
     public AudioSource explosionSound;
     Collider collider;
     MeshRenderer render;
+
+    [SerializeField] private bool breakable;
+    [SerializeField] private bool burnable;
+    [SerializeField] private Color burntColor;
+    private float burnLife;
 
     Rigidbody rb;
 
@@ -19,6 +25,8 @@ public class BreakableObject : MonoBehaviour
     {
         collider = this.GetComponent<Collider>();
         render = this.GetComponent<MeshRenderer>();
+
+        originalColor = render.material.color;
 
         mainInteactableScriptList = GameObject.Find("InteractableController").GetComponent<InteractableMainScript>().allInteractables;
     }
@@ -59,6 +67,23 @@ public class BreakableObject : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Fire"))
+        {
+            burnLife += Time.deltaTime;
+
+            Color lerpedColor = Color.Lerp(originalColor, burntColor, burnLife / 2f);
+            render.material.color = lerpedColor;
+
+            if (burnLife > 3)
+            {
+                StartCoroutine(Explode());
+            }
+        }
+    }
+
     IEnumerator Explode()
     {
         print("Destroying");
