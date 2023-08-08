@@ -66,6 +66,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: -876546973899608171, guid: 11a3f0676b2b8f24b8acbdf114e9fc97, type: 3}
+  - {fileID: 2100000, guid: 97d9e84734e7d614aa28ac6cd1b62dac, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -132,6 +133,9 @@ MonoBehaviour:
   materialStrength: 150
   explosion: {fileID: 0}
   explosionSound: {fileID: 0}
+  breakable: 0
+  burnable: 0
+  burntColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!82 &2914924563091528625
 AudioSource:
   m_ObjectHideFlags: 0

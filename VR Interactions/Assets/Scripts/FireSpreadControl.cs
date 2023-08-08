@@ -157,29 +157,20 @@ public class FireSpreadControl : MonoBehaviour
 
     IEnumerator ActiveFireSpread()
     {
-        int currentFire = allFire.Count();
-        int i = 0;
+        int currentFire = activeFire.Count();
 
-        //List<GameObject> nextWaveFire = new List<GameObject>(allFire);
+        List<GameObject> nextWaveFire = new List<GameObject>(activeFire);
 
-        while (i < allFire.Count())
-        {
-            SingularFireSpread(allFire[i]);
-            yield return null;
-        }
-
-        /*
         for (int i = currentFire - 1; i >= 0; i--)
         {
             SingularFireSpread(nextWaveFire[i]);
             yield return null;
 
-            if (allFire.Count() - i == 0)
+            if (activeFire.Count() - i == 0)
             {
                 break;
             }
         }
-        */
 
         fireSpreadCoroutine = null;
     }
