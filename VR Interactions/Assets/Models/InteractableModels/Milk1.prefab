@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 248722631279690305}
   - component: {fileID: 5420190450298925208}
   - component: {fileID: 6591764761431339716}
+  - component: {fileID: 7685118472399260618}
   m_Layer: 0
   m_Name: Milk1
   m_TagString: Breakable
@@ -255,3 +256,17 @@ MonoBehaviour:
   breakable: 0
   burnable: 1
   burntColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!64 &7685118472399260618
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3696842464255458734}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2127473872815527217, guid: c4ad568e7a5d8c540929e58625153a1b, type: 3}
