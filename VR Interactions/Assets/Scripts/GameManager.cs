@@ -55,9 +55,11 @@ public class GameManager : MonoBehaviour
     
     }
 
-    void OnDeath()
+    public void OnDeath()
     {
-        PlayerDeath.OnDeath += DeathEnding;
+        //PlayerDeath.OnDeath += DeathEnding;
+        Debug.Log("death");
+        GameEnd(4);
     }
 
     void DeathEnding()

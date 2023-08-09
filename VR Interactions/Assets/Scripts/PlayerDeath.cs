@@ -87,11 +87,12 @@ public class PlayerDeath : MonoBehaviour
             Debug.Log("Player DIE");
             VolumeManager.instance.stack.GetComponent<Vignette>().intensity = new ClampedFloatParameter(1, 0, 1f, true);
 
-            if (OnDeath != null)
-            {
-                OnDeath();
-            }
+            //if (OnDeath != null)
+            //{
+            //    GameManager.instance.OnDeath();
+            //}
 
+            GameManager.instance.OnDeath();
             return;
             // want this to be only called once.
             //StartCoroutine(Die());
