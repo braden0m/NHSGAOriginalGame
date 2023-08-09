@@ -46,7 +46,8 @@ public class RagdollMovement : MonoBehaviour
     [SerializeField] Color originalColor, transparentColor;
     [SerializeField] Color newColor;
     [SerializeField] private SkinnedMeshRenderer ragDoll;
-    [SerializeField]
+    public AudioSource hurtSound;
+    //[SerializeField]
     //private XRGrabInteractable xrGrab;
     void Start()
     {
@@ -194,6 +195,15 @@ public class RagdollMovement : MonoBehaviour
     //    }
     //}
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("asdf");
+        if (collision.gameObject.tag == "BreakTool" && !hurtSound.isPlaying)
+        {
+            Debug.Log("af");
+            hurtSound.Play();
+        }
+    }
     private void OnTriggerStay(Collider other)
     {
         Debug.Log("hha");
