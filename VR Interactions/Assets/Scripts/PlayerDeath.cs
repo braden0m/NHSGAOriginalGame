@@ -19,6 +19,9 @@ public class PlayerDeath : MonoBehaviour
 
     [SerializeField] Color originalColor, newColor;
 
+    public delegate void playerDeath();
+    public static event playerDeath OnDeath;
+
     void Start()
     {
         addTime = 1f;
@@ -71,6 +74,12 @@ public class PlayerDeath : MonoBehaviour
         {
             Debug.Log("Player DIE");
             VolumeManager.instance.stack.GetComponent<Vignette>().intensity = new ClampedFloatParameter(1, 0, 1f, true);
+
+            if (OnDeath != null)
+            {
+                OnDeath();
+            }
+
             return;
             // want this to be only called once.
             //StartCoroutine(Die());

@@ -55,6 +55,16 @@ public class GameManager : MonoBehaviour
     
     }
 
+    void OnDeath()
+    {
+        PlayerDeath.OnDeath += DeathEnding;
+    }
+
+    void DeathEnding()
+    {
+        GameEnd(4);
+    }
+
     private void GameEnd(int caseNum)
     {
         gameStateSO.gameCase = caseNum;
