@@ -17,7 +17,7 @@ public class ToMenu : MonoBehaviour
     [SerializeField] private GameStateSO gameStateSO;
 
     [SerializeField] private TextMeshProUGUI endText;
-
+    [SerializeField] private TextMeshProUGUI endInstructions;
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +54,7 @@ public class ToMenu : MonoBehaviour
 
     private void DisplayInfo(int caseNum)
     {
+        endInstructions.text = "Hover over the cube to restart";
         switch (caseNum)
         {
             case 1:
@@ -64,6 +65,7 @@ public class ToMenu : MonoBehaviour
                 break;
             case 3:
                 endText.text = $"Congratulations! You saved all {gameStateSO.ragdollTotal} ragdolls. Good job!";
+                endInstructions.text = "Hover over the LEFT cube to restart/nRIGHT cube to go to NEXT LEVEL";
                 break;
             case 4:
                 endText.text = $"You have died! Stay away from the fire!";
