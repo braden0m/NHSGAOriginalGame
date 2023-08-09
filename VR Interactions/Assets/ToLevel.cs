@@ -21,7 +21,7 @@ public class ToLevel : MonoBehaviour
         cubeRenderer = GetComponent<Renderer>();
 
         //Temp fail case
-        if (gameStateSO.ragdollSaved / gameStateSO.ragdollTotal < 0.5f || gameStateSO.gameCase == 4)
+        if (gameStateSO.ragdollSaved / gameStateSO.ragdollTotal < 0.5f || gameStateSO.gameCase == 4 || gameStateSO.currentLevel == 2)
         {
             Destroy(this.gameObject);
         }
