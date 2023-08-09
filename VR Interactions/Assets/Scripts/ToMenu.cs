@@ -65,6 +65,9 @@ public class ToMenu : MonoBehaviour
             case 3:
                 endText.text = $"Congratulations! You saved all {gameStateSO.ragdollTotal} ragdolls. Good job!";
                 break;
+            case 4:
+                endText.text = $"You have died! Stay away from the fire!";
+                break;
         }
 
     }

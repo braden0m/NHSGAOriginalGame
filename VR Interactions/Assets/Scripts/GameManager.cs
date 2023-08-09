@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
         instance = this;
         ragdolls = GameObject.FindGameObjectsWithTag("Ragdoll");
         Debug.Log(ragdolls.Length);
-        deadRagdolls =0;
+        deadRagdolls = 0;
         savedRagdolls = 0;
     }
 
