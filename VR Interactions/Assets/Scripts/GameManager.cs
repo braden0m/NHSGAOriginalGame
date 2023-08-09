@@ -12,67 +12,72 @@ public class GameManager : MonoBehaviour
     public AudioSource deathSound;
 
     public int currentLevel;
+    private bool playerDied;
 
     [SerializeField] private GameStateSO gameStateSO;
     void Start()
     {
         instance = this;
         ragdolls = GameObject.FindGameObjectsWithTag("Ragdoll");
+        gameStateSO.ragdollTotal = ragdolls.Length;
         Debug.Log(ragdolls.Length);
         deadRagdolls = 0;
         savedRagdolls = 0;
+
+        playerDied = false;
+    }
+
+    private void Update()
+    {
+        if (savedRagdolls + deadRagdolls == gameStateSO.ragdollTotal) {
+            GameEnd();
+        }
     }
 
     public void RagdollLife()
     {
-
         deadRagdolls++;
         // play deathsound here since sometimes you haven't seen the ragdoll but they already died
         deathSound.Play();
         Debug.Log(deadRagdolls);
-        if (deadRagdolls == ragdolls.Length)
-        {
-            GameEnd(1);
-        }
-        else if (savedRagdolls + deadRagdolls == ragdolls.Length)
-        {
-            GameEnd(3);
-        }
     }
 
     public void SaveRagdoll()
     {
         savedRagdolls++;
-        Debug.Log(savedRagdolls);
-        if (savedRagdolls == ragdolls.Length)
-        {
-            GameEnd(2);
-        }
-        else if (savedRagdolls == ragdolls.Length)
-        {
-            GameEnd(3);
-        }
-    
+        Debug.Log(savedRagdolls);   
     }
 
     public void OnDeath()
     {
         //PlayerDeath.OnDeath += DeathEnding;
-        Debug.Log("death");
-        GameEnd(4);
+        playerDied = true;
+        GameEnd();
     }
-
-    void DeathEnding()
+    
+    private void GameEnd()
     {
-        GameEnd(4);
-    }
-
-    private void GameEnd(int caseNum)
-    {
-        gameStateSO.gameCase = caseNum;
         gameStateSO.ragdollSaved = savedRagdolls;
         gameStateSO.ragdollTotal = ragdolls.Length;
         gameStateSO.currentLevel = currentLevel;
+
+        if (playerDied)
+        {
+            gameStateSO.gameCase = 4;
+        }
+        else if (deadRagdolls == ragdolls.Length)
+        {
+            gameStateSO.gameCase = 1;
+        }
+        else if (savedRagdolls == ragdolls.Length)
+        {
+            gameStateSO.gameCase = 3;
+        }
+        else if (savedRagdolls + deadRagdolls == ragdolls.Length)
+        {
+            gameStateSO.gameCase = 2;
+        }
+
         SceneManager.LoadScene("WinLoseScene");
     }
 }
