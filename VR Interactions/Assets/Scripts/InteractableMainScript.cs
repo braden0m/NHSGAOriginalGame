@@ -46,6 +46,12 @@ public class InteractableMainScript : MonoBehaviour
             {
                 value.gameObject.GetComponentInChildren<AudioSource>().playOnAwake = false;
             }
+            else
+            {
+                AudioSource createdAudioSource = value.gameObject.AddComponent<AudioSource>();
+                createdAudioSource.maxDistance = 3;
+                createdAudioSource.clip = audioClips[0];
+            }
 
             if (value.gameObject.GetComponent<BreakableObject>() == null)
             {
