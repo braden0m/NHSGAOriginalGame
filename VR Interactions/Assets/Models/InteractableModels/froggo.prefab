@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8595724443749511707}
   - component: {fileID: 5813815749369923281}
   - component: {fileID: 1868969671992538546}
+  - component: {fileID: -8825820566367876117}
   m_Layer: 0
   m_Name: froggo
   m_TagString: Breakable
@@ -102,3 +103,16 @@ MonoBehaviour:
   breakable: 0
   burnable: 0
   burntColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!65 &-8825820566367876117
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5453347803703781124}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.028062794, y: 0.05289891, z: 0.0668651}
+  m_Center: {x: 3.092503e-10, y: 0.015122725, z: -0.009349989}
