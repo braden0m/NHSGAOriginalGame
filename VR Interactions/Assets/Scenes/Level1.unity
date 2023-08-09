@@ -744,6 +744,7 @@ MonoBehaviour:
   transparentColor: {r: 0, g: 0, b: 0, a: 0}
   newColor: {r: 0, g: 0, b: 0, a: 0.80784315}
   ragDoll: {fileID: 13575528}
+  hurtSound: {fileID: 1337398240}
 --- !u!65 &13575544
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12896,6 +12897,7 @@ MonoBehaviour:
   transparentColor: {r: 0, g: 0, b: 0, a: 0}
   newColor: {r: 0, g: 0, b: 0, a: 0.80784315}
   ragDoll: {fileID: 1272427347}
+  hurtSound: {fileID: 857606132}
 --- !u!114 &605105512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15359,8 +15361,8 @@ MonoBehaviour:
   allSmoke: []
   fireDirectionResolution: 8
   maxSurroundingFire: 5
-  fireSpreadDistance: 0.5
-  fireSpreadTime: 3
+  fireSpreadDistance: 1.5
+  fireSpreadTime: 7
   smokeSpread: 1
   smokeSpreadDistance: 3
   smokeSpreadTime: 5
@@ -19157,6 +19159,7 @@ MonoBehaviour:
   transparentColor: {r: 0, g: 0, b: 0, a: 0}
   newColor: {r: 0, g: 0, b: 0, a: 0.58431375}
   ragDoll: {fileID: 1645320350}
+  hurtSound: {fileID: 1405347575}
 --- !u!1 &1150041974
 GameObject:
   m_ObjectHideFlags: 0
@@ -19550,7 +19553,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dragRag: {fileID: 1983605406}
   miSound: {fileID: 1163423005}
-  hurtSound: {fileID: 1337398240}
 --- !u!95 &1163423004
 Animator:
   serializedVersion: 5
@@ -19919,7 +19921,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dragRag: {fileID: 1983605406}
   miSound: {fileID: 1182107790}
-  hurtSound: {fileID: 857606132}
 --- !u!95 &1182107789
 Animator:
   serializedVersion: 5
@@ -20640,7 +20641,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dragRag: {fileID: 1983605406}
   miSound: {fileID: 1236595831}
-  hurtSound: {fileID: 1405347575}
 --- !u!82 &1236595831
 AudioSource:
   m_ObjectHideFlags: 0
@@ -29494,7 +29494,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 6512793b5cb934049912f8a67f33ee9b, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -29505,9 +29505,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 3
+  MaxDistance: 10
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -29515,23 +29515,50 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
+      time: 0.18364868
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: -10.0039835
+      outSlope: -10.0039835
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.27414244
+      value: 0.48880005
+      inSlope: -2.5009959
+      outSlope: -2.5009959
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.4
+      value: 0.25
+      inSlope: -0.62524897
+      outSlope: -0.62524897
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.8
+      value: 0.125
+      inSlope: -0.15631224
+      outSlope: -0.15631224
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     - serializedVersion: 3
       time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
+      value: 0.1
+      inSlope: -0.10003988
+      outSlope: -0.10003988
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -29540,7 +29567,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

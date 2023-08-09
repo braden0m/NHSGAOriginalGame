@@ -37,8 +37,20 @@ public class PlayerDeath : MonoBehaviour
         Debug.Log(newIntensity);
     }
 
-    //private void Update()
-    //{
+    private void Update()
+    {
+        if (stayInFire)
+        {
+            //Debug.Log(playerAge);
+            playerAge += Time.deltaTime;
+            VolumeManager.instance.stack.GetComponent<Vignette>().color = new ColorParameter(Color.Lerp(originalColor, newColor, playerAge / 10f), true);
+            ChangeVignette();
+        }
+        else
+        {
+            VolumeManager.instance.stack.GetComponent<Vignette>().intensity = new ClampedFloatParameter(0, 0, 1f, true);
+        }
+    }
     //    if (stayInFire)
     //    {
     //        vignetteProfile.active = true;
@@ -75,15 +87,8 @@ public class PlayerDeath : MonoBehaviour
             // want this to be only called once.
             //StartCoroutine(Die());
         }
-        
         if (other.gameObject.tag == "Fire")
         {
-            Debug.Log(playerAge);
-            playerAge += Time.deltaTime;
-            VolumeManager.instance.stack.GetComponent<Vignette>().color = new ColorParameter(Color.Lerp(originalColor, newColor, playerAge/10f), true);
-            //Debug.Log(playerAge);
-            
-            ChangeVignette();
             stayInFire = true;
         }
     }
@@ -92,7 +97,7 @@ public class PlayerDeath : MonoBehaviour
     {
         if (other.gameObject.tag == "Fire")
         {
-            VolumeManager.instance.stack.GetComponent<Vignette>().intensity = new ClampedFloatParameter(0, 0, 1f, true);
+            //VolumeManager.instance.stack.GetComponent<Vignette>().intensity = new ClampedFloatParameter(0, 0, 1f, true);
             //playerAge += Time.deltaTime;
             //Debug.Log(playerAge);
             stayInFire = false;
