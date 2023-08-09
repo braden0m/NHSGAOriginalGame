@@ -15447,7 +15447,7 @@ MonoBehaviour:
   fireDirectionResolution: 8
   maxSurroundingFire: 5
   fireSpreadDistance: 1.5
-  fireSpreadTime: 7
+  fireSpreadTime: 12
   smokeSpread: 1
   smokeSpreadDistance: 3
   smokeSpreadTime: 5
