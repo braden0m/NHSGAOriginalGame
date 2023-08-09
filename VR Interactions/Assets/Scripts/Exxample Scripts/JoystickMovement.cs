@@ -29,7 +29,7 @@ public class JoystickMovement : MonoBehaviour
 
         //Quaternion.Euler(0, player.rotation.eulerAngles.y, 0)
 
-        player.position += Quaternion.Euler(0, centerCamera.rotation.eulerAngles.y, 0) * new Vector3(joystickDirection.x, 0, joystickDirection.y) * Time.deltaTime;
+        player.position += Quaternion.Euler(0, centerCamera.rotation.eulerAngles.y, 0) * new Vector3(joystickDirection.x, 0, joystickDirection.y) * Time.deltaTime * 1.5f;
 
         //Debug.DrawLine(player.position, player.position + Quaternion.Euler(0, centerCamera.rotation.eulerAngles.y, 0) * new Vector3(joystickDirection.x, 0, joystickDirection.y * 10));
 
