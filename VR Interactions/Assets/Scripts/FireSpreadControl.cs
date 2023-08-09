@@ -103,7 +103,7 @@ public class FireSpreadControl : MonoBehaviour
                     newFire.transform.position = fireSeed.transform.position + rayDirection * fireSpreadDistance;
                     //newFire.GetComponent<FireSpread>().canSpread = true;
 
-                    activeFire.Add(newFire);
+                    //activeFire.Add(newFire);
                     allFire.Add(newFire);
                 }
 
@@ -128,7 +128,7 @@ public class FireSpreadControl : MonoBehaviour
 
         }
 
-        activeFire.Remove(fireSeed);
+        //activeFire.Remove(fireSeed);
     }
 
     void SingularSmokeSpread(GameObject fireSeed)
@@ -157,6 +157,7 @@ public class FireSpreadControl : MonoBehaviour
 
     IEnumerator ActiveFireSpread()
     {
+        /*
         int currentFire = activeFire.Count();
 
         List<GameObject> nextWaveFire = new List<GameObject>(activeFire);
@@ -171,6 +172,24 @@ public class FireSpreadControl : MonoBehaviour
                 break;
             }
         }
+
+        fireSpreadCoroutine = null;
+        */
+
+        activeFire = new List<GameObject>(allFire);
+
+        for (int i = activeFire.Count - 1; i >= 0; i--)
+        {
+            SingularFireSpread(activeFire[i]);
+            yield return null;
+
+            if (activeFire.Count() - i == 0)
+            {
+                break;
+            }
+        }
+
+        activeFire = new List<GameObject>();
 
         fireSpreadCoroutine = null;
     }
