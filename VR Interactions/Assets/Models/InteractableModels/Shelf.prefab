@@ -12,12 +12,11 @@ GameObject:
   - component: {fileID: 1853985237897997086}
   - component: {fileID: 4494129025465884628}
   - component: {fileID: 2999343649621803863}
-  - component: {fileID: 8470669269246648977}
   - component: {fileID: 2914924563091528625}
   - component: {fileID: 1374157481177661821}
   m_Layer: 0
   m_Name: Shelf
-  m_TagString: Breakable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,24 +101,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4552961407312753236, guid: 11a3f0676b2b8f24b8acbdf114e9fc97, type: 3}
---- !u!114 &8470669269246648977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2692773218259123713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc41a7502f59df64a8ba13f7ae6fc52a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  materialStrength: 100000000
-  explosion: {fileID: 0}
-  explosionSound: {fileID: 0}
-  breakable: 0
-  burnable: 0
-  burntColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!82 &2914924563091528625
 AudioSource:
   m_ObjectHideFlags: 0
