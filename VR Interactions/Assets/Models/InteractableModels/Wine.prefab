@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 6768703863030919400}
   - component: {fileID: 2308599164355402922}
   - component: {fileID: 5170187134321986350}
-  - component: {fileID: 1996471984038737570}
   - component: {fileID: 938248806351090400}
+  - component: {fileID: 8687526311630558269}
   m_Layer: 0
   m_Name: Wine
   m_TagString: Breakable
@@ -30,14 +30,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4179107223439298935}
-  m_LocalRotation: {x: -4.3297806e-17, y: 0.7071068, z: 0.7071068, w: -4.3297806e-17}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0.7071068, w: 0}
   m_LocalPosition: {x: -14.297, y: 0, z: -1.037}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -180}
 --- !u!33 &367923912683619432
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -257,20 +257,6 @@ MonoBehaviour:
   breakable: 0
   burnable: 1
   burntColor: {r: 0, g: 0, b: 0, a: 0}
---- !u!64 &1996471984038737570
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4179107223439298935}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 6121590469811200223, guid: 441911bd1b2eb594a92bae647fec93ae, type: 3}
 --- !u!82 &938248806351090400
 AudioSource:
   m_ObjectHideFlags: 0
@@ -367,3 +353,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &8687526311630558269
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4179107223439298935}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0019021137, y: 0.0020000024, z: 0.0037280966}
+  m_Center: {x: 1.4078089e-27, y: -7.4505807e-10, z: 0.001864055}
