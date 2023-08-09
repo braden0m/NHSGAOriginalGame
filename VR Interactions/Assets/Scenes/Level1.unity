@@ -18258,7 +18258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   endScreen: {fileID: 1483851197}
   deathSound: {fileID: 1086052631}
-  currentLevel: 0
+  currentLevel: 1
   gameStateSO: {fileID: 11400000, guid: 64d50c21d9a8458418d4bfc098dd443d, type: 2}
 --- !u!4 &1086052630
 Transform:
