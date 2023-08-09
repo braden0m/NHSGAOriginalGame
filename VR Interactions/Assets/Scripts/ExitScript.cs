@@ -6,12 +6,11 @@ public class ExitScript : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Ragdoll")
+        if (collision.gameObject.tag == "Ragdoll" || collision.gameObject.transform.parent.gameObject.name == "Pelvis")
         {
-            Debug.Log("Collision");
             GameManager.instance.SaveRagdoll();
             collision.gameObject.transform.position = new Vector3(100f,100f,100f);
-            // we dont want double collision
+            // we dont want double collision  
             //collision.gameObject.SetActive(false);
         }
     }
