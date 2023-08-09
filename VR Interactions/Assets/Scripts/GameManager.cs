@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
         {
             GameEnd(2);
         }
-        else if (savedRagdolls + deadRagdolls == ragdolls.Length)
+        else if (savedRagdolls == ragdolls.Length)
         {
             GameEnd(3);
         }
