@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2822568605118397254}
   - component: {fileID: 3524986367774415693}
   - component: {fileID: 4139590131041226815}
-  - component: {fileID: 721280800060206862}
+  - component: {fileID: 3497507496488385873}
   m_Layer: 0
   m_Name: TallSodaCan4
   m_TagString: Breakable
@@ -353,8 +353,8 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!64 &721280800060206862
-MeshCollider:
+--- !u!65 &3497507496488385873
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -363,7 +363,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 6168650812902891753, guid: e7dce944dc0f98f4785c75ddc41f26be, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.0012192068, y: 0.0011639971, z: 0.0025490583}
+  m_Center: {x: 0.000012626354, y: -0.00004861055, z: 0.0012678999}

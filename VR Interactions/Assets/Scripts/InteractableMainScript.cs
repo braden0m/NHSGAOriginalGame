@@ -42,6 +42,8 @@ public class InteractableMainScript : MonoBehaviour
                 createdParticleRenderer.material = objectMaterial;
             }
 
+            
+
             if (value.gameObject.GetComponentInChildren<AudioSource>() != null)
             {
                 value.gameObject.GetComponentInChildren<AudioSource>().playOnAwake = false;
@@ -52,6 +54,7 @@ public class InteractableMainScript : MonoBehaviour
                 createdAudioSource.maxDistance = 3;
                 createdAudioSource.clip = audioClips[0];
             }
+            
 
             if (value.gameObject.GetComponent<BreakableObject>() == null)
             {

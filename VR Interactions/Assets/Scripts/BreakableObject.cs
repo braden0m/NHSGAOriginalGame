@@ -105,9 +105,19 @@ public class BreakableObject : MonoBehaviour
         explosion = gameObject.GetComponentInChildren<ParticleSystem>();
         if (explosion != null)
         {
+            Material explosionMaterial = explosion.GetComponent<Renderer>().materials[explosion.GetComponent<Renderer>().materials.Length - 1];
+            Color explosionColor = explosionMaterial.color;
+            explosionMaterial.color = new Color(explosionColor.r, explosionColor.g, explosionColor.b, 255);
+
+            explosion.GetComponent<Renderer>().materials[explosion.GetComponent<Renderer>().materials.Length - 1] = explosionMaterial;
+
             explosion.Play();
         }
 
+
+        soundManager.PlaySound(this.gameObject);
+
+        /*
         explosionSound = gameObject.GetComponent<AudioSource>();
         if (explosionSound != null)
         {
@@ -115,6 +125,7 @@ public class BreakableObject : MonoBehaviour
 
             soundManager.PlaySound(this.gameObject);
         }
+        */
 
         yield return new WaitForSeconds(6f);
 
