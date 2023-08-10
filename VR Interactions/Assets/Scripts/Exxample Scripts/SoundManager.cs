@@ -16,14 +16,16 @@ public class SoundManager : MonoBehaviour
 
         foreach (GameObject thing in GameObject.FindGameObjectsWithTag("Breakable"))
         {
-            if (thing.GetComponent<AudioSource>() != null)
+            AudioSource targetSource = thing.GetComponent<AudioSource>();
+
+            if (targetSource != null)
             {
                 if (!audioClipDictionary.ContainsKey(thing.name))
                 {
-                    audioClipDictionary.Add(thing.name, thing.GetComponent<AudioSource>().clip);
+                    audioClipDictionary.Add(thing.name, targetSource.clip);
                 }
 
-                thing.GetComponent<AudioSource>().enabled = false;
+                Destroy(targetSource);
             }
         }
 
