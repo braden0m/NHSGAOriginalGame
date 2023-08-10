@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 410087040}
-  m_IndirectSpecularColor: {r: 0.172768, g: 0.21589169, b: 0.29782546, a: 1}
+  m_IndirectSpecularColor: {r: 0.17276844, g: 0.21589246, b: 0.2978263, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6246,6 +6246,9 @@ MonoBehaviour:
   fireControl: {fileID: 851793244}
   spray: {fileID: 573329733}
   spraySound: {fileID: 993816759}
+  waterDisplay: {fileID: 96147551}
+  waterLevelBar: {fileID: 1685413000}
+  waterlevel: 3
   hoverColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &408011866
 MonoBehaviour:
@@ -33198,7 +33201,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000000051601834, y: -0.141}
+  m_AnchoredPosition: {x: 0, y: -0.141}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2034155249
