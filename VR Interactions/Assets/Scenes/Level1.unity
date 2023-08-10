@@ -6246,9 +6246,7 @@ MonoBehaviour:
   fireControl: {fileID: 851793244}
   spray: {fileID: 573329733}
   spraySound: {fileID: 993816759}
-  waterDisplay: {fileID: 96147551}
-  waterLevelBar: {fileID: 1685413000}
-  waterlevel: 3
+  hoverColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &408011866
 MonoBehaviour:
   m_ObjectHideFlags: 0
