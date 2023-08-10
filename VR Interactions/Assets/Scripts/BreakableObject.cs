@@ -18,7 +18,7 @@ public class BreakableObject : MonoBehaviour
     [SerializeField] private Color burntColor;
     private float burnLife;
 
-    private SoundManager soundManager = GameObject.FindFirstObjectByType<SoundManager>();
+    private SoundManager soundManager;
 
     Rigidbody rb;
 
@@ -29,6 +29,7 @@ public class BreakableObject : MonoBehaviour
         render = this.GetComponent<MeshRenderer>();
 
         originalColor = render.material.color;
+        soundManager = GameObject.FindFirstObjectByType<SoundManager>();
 
         mainInteactableScriptList = GameObject.Find("InteractableController").GetComponent<InteractableMainScript>().allInteractables;
     }
