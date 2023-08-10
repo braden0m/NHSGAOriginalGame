@@ -114,6 +114,10 @@ public class BreakableObject : MonoBehaviour
             explosion.Play();
         }
 
+
+        soundManager.PlaySound(this.gameObject);
+
+        /*
         explosionSound = gameObject.GetComponent<AudioSource>();
         if (explosionSound != null)
         {
@@ -121,6 +125,7 @@ public class BreakableObject : MonoBehaviour
 
             soundManager.PlaySound(this.gameObject);
         }
+        */
 
         yield return new WaitForSeconds(6f);
 
