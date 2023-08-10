@@ -18,6 +18,8 @@ public class BreakableObject : MonoBehaviour
     [SerializeField] private Color burntColor;
     private float burnLife;
 
+    private SoundManager soundManager = GameObject.FindFirstObjectByType<SoundManager>();
+
     Rigidbody rb;
 
     // Start is called before the first frame update
@@ -108,8 +110,11 @@ public class BreakableObject : MonoBehaviour
         explosionSound = gameObject.GetComponent<AudioSource>();
         if (explosionSound != null)
         {
-            explosionSound.Play();
+            //explosionSound.Play();
+
+            soundManager.PlaySound(this.gameObject);
         }
+
         yield return new WaitForSeconds(6f);
 
         if (mainInteactableScriptList.Contains(this.gameObject))
