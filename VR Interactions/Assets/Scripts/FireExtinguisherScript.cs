@@ -7,10 +7,13 @@ public class FireExtinguisherScript : MonoBehaviour
 {
     private XRBaseInteractable interactable;
     private Renderer cubeRenderer;
-    private Color originalColor;
+    [SerializeField] private FireSpreadControl fireControl;
     [SerializeField] private ParticleSystem spray;
     [SerializeField] private AudioSource spraySound;
-    [SerializeField] private Color hoverColor;
+    [SerializeField] private GameObject waterDisplay;
+    [SerializeField] private RectTransform waterLevelBar;
+
+    [SerializeField] private float waterlevel;
 
     private bool held = false;
     private bool spraying = false;
@@ -20,54 +23,72 @@ public class FireExtinguisherScript : MonoBehaviour
     {
         interactable = GetComponent<XRBaseInteractable>();
         cubeRenderer = GetComponent<Renderer>();
-        originalColor = cubeRenderer.material.color;
-        spraySound = GetComponent<AudioSource>();
     }
-    private void Update()
+    private void FixedUpdate()
     {
-        if (spraying)
+        waterDisplay.SetActive(held);
+        waterLevelBar.localPosition = new Vector3(0, (3 - waterlevel) / 6, 0);
+        waterLevelBar.localScale = new Vector3(1, waterlevel / 3, 1);
+
+        if (spraying && waterlevel > 0 && held)
         {
-            print("SPRAY");
-            //spray.Play();
-        }
-        else
+            spray.Play();
+            spraySound.Play();
+
+            waterlevel -= 0.01f;
+
+            RaycastHit rayhit;
+            Physics.Raycast(spray.transform.position, spray.transform.forward, out rayhit, 4);
+
+            if (rayhit.collider != null)
+            {
+                if (rayhit.collider.gameObject.CompareTag("Fire"))
+                {
+                    fireControl.allFire.Remove(rayhit.collider.gameObject);
+                    Destroy(rayhit.collider.gameObject);
+                }
+            }
+
+        } else
         {
-            //spray.Stop();
+            spray.Stop();
+            spraySound.Stop();
         }
+
+        /*
+        if (!died && barrelHit.collider != null && barrelHit.collider.gameObject.CompareTag("Enemy") && !(skippedBarrels.Exists(x => x == barrelHit.collider.gameObject)))
+        {
+            StartCoroutine(ShowObtainedScore(barrelHit.point, 100, false));
+
+            skippedBarrels.Add(barrelHit.collider.gameObject);
+        }
+        else if (died && barrelHit.collider != null && barrelHit.collider.gameObject.CompareTag("Bottom"))
+        {
+            if (!splashed)
+            {
+                splashed = true;
+                Instantiate(splash, transform.position, Quaternion.identity);
+            }
+        }
+
+        */
     }
     public void InteractableActivate(ActivateEventArgs args)
     {
         spraying = true;
-        spray.Play();
-        spraySound.Play();
     }
 
     public void InteractableDeactivate(DeactivateEventArgs args)
     {
         spraying = false;
-        spray.Stop();
-        spraySound.Stop();
     }
     public void InteractableHeld(SelectEnterEventArgs args)
     {
         held = true;
-        cubeRenderer.material.color = originalColor;
     }
 
     public void InteractableUnheld(SelectExitEventArgs args)
     {
         held = false;
-        cubeRenderer.material.color = originalColor;
-    }
-    public void InteractableHover(HoverEnterEventArgs args)
-    {
-        if (!held)
-        {
-            cubeRenderer.material.color = hoverColor;
-        }
-    }
-    public void InteractableUnhover(HoverExitEventArgs args)
-    {
-        cubeRenderer.material.color = originalColor;
     }
 }
