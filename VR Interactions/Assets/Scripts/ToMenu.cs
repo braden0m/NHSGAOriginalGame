@@ -18,6 +18,8 @@ public class ToMenu : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI endText;
     [SerializeField] private TextMeshProUGUI endInstructions;
+
+    public AudioSource loseSound, winSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -59,16 +61,20 @@ public class ToMenu : MonoBehaviour
         {
             case 1:
                 endText.text = $"You saved none of the {gameStateSO.ragdollTotal} ragdolls. Please don't be a firefighter.";
+                loseSound.Play();
                 break;
             case 2:
                 endText.text = $"You saved {gameStateSO.ragdollSaved} out of the {gameStateSO.ragdollTotal} ragdolls. Try again!";
+                loseSound.Play();
                 break;
             case 3:
                 endText.text = $"Congratulations! You saved all {gameStateSO.ragdollTotal} ragdolls. Good job!";
                 endInstructions.text = "Hover over the LEFT cube to restart/nRIGHT cube to go to NEXT LEVEL";
+                winSound.Play();
                 break;
             case 4:
                 endText.text = $"You have died! Stay away from the fire!";
+                loseSound.Play();
                 break;
         }
 
