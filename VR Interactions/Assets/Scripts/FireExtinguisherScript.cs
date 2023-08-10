@@ -8,12 +8,14 @@ public class FireExtinguisherScript : MonoBehaviour
     private XRBaseInteractable interactable;
     private Renderer cubeRenderer;
     [SerializeField] private FireSpreadControl fireControl;
+    private Color originalColor;
     [SerializeField] private ParticleSystem spray;
     [SerializeField] private AudioSource spraySound;
     [SerializeField] private GameObject waterDisplay;
     [SerializeField] private RectTransform waterLevelBar;
 
     [SerializeField] private float waterlevel;
+    [SerializeField] private Color hoverColor;
 
     private bool held = false;
     private bool spraying = false;
@@ -49,33 +51,17 @@ public class FireExtinguisherScript : MonoBehaviour
                 }
             }
 
-        } else
+        }
+        else
         {
             spray.Stop();
             spraySound.Stop();
         }
 
-        /*
-        if (!died && barrelHit.collider != null && barrelHit.collider.gameObject.CompareTag("Enemy") && !(skippedBarrels.Exists(x => x == barrelHit.collider.gameObject)))
-        {
-            StartCoroutine(ShowObtainedScore(barrelHit.point, 100, false));
-
-            skippedBarrels.Add(barrelHit.collider.gameObject);
-        }
-        else if (died && barrelHit.collider != null && barrelHit.collider.gameObject.CompareTag("Bottom"))
-        {
-            if (!splashed)
-            {
-                splashed = true;
-                Instantiate(splash, transform.position, Quaternion.identity);
-            }
-        }
-
-        */
     }
     public void InteractableActivate(ActivateEventArgs args)
     {
-        spraying = true;
+        spraying = true;;
     }
 
     public void InteractableDeactivate(DeactivateEventArgs args)
