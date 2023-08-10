@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 410087040}
-  m_IndirectSpecularColor: {r: 0.17276788, g: 0.21589147, b: 0.29782534, a: 1}
+  m_IndirectSpecularColor: {r: 0.172768, g: 0.21589169, b: 0.29782546, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6243,8 +6243,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03be8ec1daf4434499efe96fcbf37592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireControl: {fileID: 851793244}
   spray: {fileID: 573329733}
   spraySound: {fileID: 993816759}
+  waterDisplay: {fileID: 96147551}
+  waterLevelBar: {fileID: 1685413000}
+  waterlevel: 3
   hoverColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &408011866
 MonoBehaviour:
